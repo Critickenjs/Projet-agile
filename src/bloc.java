@@ -1,5 +1,3 @@
-package src;
-
 public class Bloc {     
     private int rotation;     
     private String[][]piece;     
