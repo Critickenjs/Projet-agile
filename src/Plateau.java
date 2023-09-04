@@ -14,11 +14,11 @@ public class Plateau{
             }
         }
     }
-    String toChar(Objet plateau[][]){
+    String toChar(Object plateau[][]){
         String res="|";
         for(int i =0;i<TAILLE;i+=1){
             for(int y =0;y<LARGEUR;y+=1){
-                if(plateau[i][j] != null){
+                if(plateau[i][y] != null){
                     res= res + "*";
                 }
                 else {
