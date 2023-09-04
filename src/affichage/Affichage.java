@@ -19,8 +19,8 @@ public class Affichage {
 	}
 	
 	public void init() {
-		this.changerTailleTerminal();
 		this.effacerTerminal();
+		this.changerTailleTerminal();
 	}
 	
 	public void rafraichir(String contenu) {
