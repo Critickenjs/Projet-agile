@@ -14,7 +14,22 @@ public class Bloc {
         }         
         if(type == 2) {             
             res = new String[][] {{"v","v","v","v"},{"v","v","v","v"},{"v","v","v","v"},{"x","x","x","x"}};         
-        }         
+        }
+        if(type == 3) {             
+            res = new String[][] {{"v","v","v","v"},{"v","v","v","v"},{"x","v","v","v"},{"x","x","x","v"}};         
+        }
+        if(type == 4) {             
+            res = new String[][] {{"v","v","v","v"},{"v","v","v","v"},{"v","v","x","v"},{"x","x","x","v"}};         
+        }
+        if(type == 5) {             
+            res = new String[][] {{"v","v","v","v"},{"v","v","v","v"},{"v","x","v","v"},{"x","x","x","v"}};         
+        }
+        if(type == 6) {             
+            res = new String[][] {{"v","v","v","v"},{"v","v","v","v"},{"v","x","x","v"},{"x","x","v","v"}};         
+        }
+        if(type == 7) {             
+            res = new String[][] {{"v","v","v","v"},{"v","v","v","v"},{"x","x","v","v"},{"v","x","x","v"}};         
+        }
         return res;     
     }
 }
