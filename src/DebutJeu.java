@@ -6,6 +6,18 @@ public class DebutJeu{
     }
 
     public static void main(String[] args) {
-        Plateau p = new Plateau();
+        Plateau plateauActuel = new Plateau();
+        boolean chuteOk = false;
+        boolean partieFini = false;
+        while (!partieFini) {
+        	//Ajout d'une pièce
+        	plateauActuel.ajouterPiece(new Bloc(1));
+        	while (!chuteOk) {
+        		//On avance la pièce
+        		chuteOk = plateauActuel.goDown();
+        		Thread.sleep(1000);
+    		}
+        	partieFini = plateauActuel.partieEstFini();
+		}
     }
 }
