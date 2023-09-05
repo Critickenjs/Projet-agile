@@ -29,5 +29,9 @@ public enum TypeBloc {
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
 	}
-	
+	public int[][] Rotation(int indiceRotation, TypeBloc type){
+		int[][]res = type.getCoordonnees();
+		
+		return res;
+	}
 }

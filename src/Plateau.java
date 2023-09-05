@@ -1,4 +1,4 @@
-import affichage.Affichage;
+eimport affichage.Affichage;
 
 public class Plateau{
     private final int LARGEUR = 1;

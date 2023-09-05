@@ -1,5 +1,8 @@
 package affichage;
 
+import java.awt.print.Printable;
+import java.util.Scanner;
+
 public class Affichage {
 	
 	private int hauteur;
@@ -26,5 +29,74 @@ public class Affichage {
 	public void rafraichir(String contenu) {
 		this.effacerTerminal();
 		System.out.print(contenu);
+	}
+	public static void Menu() {
+		System.out.println("                                  ___           ___           ___           ___     \n"
+				+ "     _____                       /  /\\         /  /\\         /__/|         /  /\\    \n"
+				+ "    /  /::\\                     /  /::\\       /  /:/        |  |:|        /  /:/_   \n"
+				+ "   /  /:/\\:\\    ___     ___    /  /:/\\:\\     /  /:/         |  |:|       /  /:/ /\\  \n"
+				+ "  /  /:/~/::\\  /__/\\   /  /\\  /  /:/  \\:\\   /  /:/  ___   __|  |:|      /  /:/ /::\\ \n"
+				+ " /__/:/ /:/\\:| \\  \\:\\ /  /:/ /__/:/ \\__\\:\\ /__/:/  /  /\\ /__/\\_|:|____ /__/:/ /:/\\:\\\n"
+				+ " \\  \\:\\/:/~/:/  \\  \\:\\  /:/  \\  \\:\\ /  /:/ \\  \\:\\ /  /:/ \\  \\:\\/:::::/ \\  \\:\\/:/~/:/\n"
+				+ "  \\  \\::/ /:/    \\  \\:\\/:/    \\  \\:\\  /:/   \\  \\:\\  /:/   \\  \\::/~~~~   \\  \\::/ /:/ \n"
+				+ "   \\  \\:\\/:/      \\  \\::/      \\  \\:\\/:/     \\  \\:\\/:/     \\  \\:\\        \\__\\/ /:/  \n"
+				+ "    \\  \\::/        \\__\\/        \\  \\::/       \\  \\::/       \\  \\:\\         /__/:/   \n"
+				+ "     \\__\\/                       \\__\\/         \\__\\/         \\__\\/         \\__\\/    ");
+		System.out.println("\n\n\n Bienvenue dans blocks un jeu cool.\n\n");
+		System.out.println("1.Jouer\n");
+		System.out.println("2.Tableau des scores");
+        Scanner scanner = new Scanner(System.in);
+        String nombre = scanner.nextLine();
+        if(nombre.equals("1")) {
+        	affichePlateau();
+        }
+        if(nombre.equals("2")) {
+        	//tableau des scores
+        	scanner.close();
+        	System.out.println("scores\n");
+        }
+	}
+	public static void affichePlateau() {
+		System.out.println("Score:\n"
+						 + "__________\n"
+						+ "|          |\n"
+						+ "|          |\n"
+						+ "|__________|\n");
+		System.out.println("____________\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "|            |\n"
+						+ "--------------\n");
+	}
+	public static void main(String[] args) {
+		Menu();
 	}
 }
