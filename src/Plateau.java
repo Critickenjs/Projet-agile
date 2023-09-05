@@ -11,7 +11,7 @@ public class Plateau{
     private TypeBloc blocCourant;
 	Joueur joueur;
 
-    public Plateau(){
+    public Plateau(String joueur_nom){
         plateauActuel = new Couleur[HAUTEUR][LARGEUR];
         plateauSuivant = new Couleur[HAUTEUR][LARGEUR];
         for(int i = 0; i<HAUTEUR;i++){
@@ -21,7 +21,7 @@ public class Plateau{
                 //Replace this with enum colour
             }
         }
-		joueur = new Joueur("test");
+		joueur = new Joueur(joueur_nom);
     }
     
     public boolean ajouterBloc(TypeBloc bloc) {

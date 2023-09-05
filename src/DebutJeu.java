@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class DebutJeu{
 
@@ -7,9 +8,16 @@ public class DebutJeu{
 
     public static void main(String[] args) {
     	//Initialisation du jeu
+
+		//Il faut demander a l'utilisateur son nom, mettre dans 
+		Scanner nomJoueur = new Scanner(System.in);
+		System.out.println("Entrez votre nom: ");
+		String joueur_nom = nomJoueur.nextLine();
+		nomJoueur.close();
+		
     	Affichage affichageCourant = new Affichage(Plateau.HAUTEUR+2, Plateau.LARGEUR+2);
     	affichageCourant.init();
-        Plateau plateauActuel = new Plateau();
+        Plateau plateauActuel = new Plateau(joueur_nom);
         
         
         boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
