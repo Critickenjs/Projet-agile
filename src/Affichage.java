@@ -1,8 +1,11 @@
+<<<<<<< HEAD:src/affichage/Affichage.java
 package affichage;
 
 import java.awt.print.Printable;
 import java.util.Scanner;
 
+=======
+>>>>>>> 907dd3dbfa2ef8c8c5068ad6bc119a4dd813347a:src/Affichage.java
 public class Affichage {
 	
 	private int hauteur;
