@@ -32,4 +32,9 @@ public class Bloc {
         }
         return res;     
     }
+    public String[][] TournerPiece(int type, int indiceRotation){
+    	String [][] res = null;
+    	
+    	return res;
+    }
 }
