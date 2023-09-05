@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-eimport affichage.Affichage;
 
-=======
->>>>>>> 907dd3dbfa2ef8c8c5068ad6bc119a4dd813347a
 public class Plateau{
     public static final int LARGEUR = 8;
     public static final int HAUTEUR = 20;
