@@ -1,5 +1,3 @@
-package affichage;
-
 public class Affichage {
 	
 	private int hauteur;

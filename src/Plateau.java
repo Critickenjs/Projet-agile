@@ -1,13 +1,12 @@
-import affichage.Affichage;
-
 public class Plateau{
-    private final int LARGEUR = 1;
-    private final int TAILLE = 10;
+    public static final int LARGEUR = 8;
+    public static final int TAILLE = 20;
     //This will be a matrix of colours (enum for each block)
     private Couleur plateau[][]; 
     private int[][] current_pos = new int[2][4];
     private int[][] next_pos = new int[2][4];
     private Affichage affi;
+    private TypeBloc blocCourant;
 
     public Plateau(){
         plateau = new Couleur[LARGEUR][TAILLE];
@@ -17,64 +16,79 @@ public class Plateau{
                 //Replace this with enum colour
             }
         }
-        affi = new Affichage(TAILLE+2, LARGEUR+2);
-        affi.init();
+    }
+    
+    public boolean ajouterBloc(TypeBloc bloc) {
+    	this.blocCourant = bloc;
+    	this.current_pos = bloc.getCoordonnees();
+    	this.next_pos = bloc.getCoordonnees();
+    	if (this.positionsSuivantesLibres() == false) {
+			return false;
+		}
+    	this.colourCases();
+    	return true;
     }
 
-    String toChar(){
-        String res="|";
-        for(int i =0;i<TAILLE;i+=1){
-            for(int y =0;y<LARGEUR;y+=1){
-                if(plateau[i][y] != null){
-                    res= res + "*";
-                }
-                else {
-                    res= res + " ";
-                }
-            }
-            res = res+ "|/n";
-        }
-         for(int i =0;i<TAILLE;i+=1){
-            res = res+ "_";
-         }
+    public String toString(){
+        String res = "";
+        for (int i = 0; i < this.plateau.length; i++) {
+			for (int j = 0; j < this.plateau[i].length; j++) {
+				if (this.plateau[i][j] == Couleur.EMPTY) {
+					res += " ";
+				} else {
+					res += "O";
+				}
+			}
+			res += "\n";
+		}
          return res;
      }
 
-    public boolean checkIfOccupied(){
-        boolean occupied = false;
-        int i = 0;
-        while(!occupied && i<4){
-            if(this.plateau[next_pos[0][i]][next_pos[1][i]] == Couleur.EMPTY){
-                //Replace this if with if == empty 
-                i++;
-            }else{
-                occupied = true;
-            }
-        }
-        return occupied;
+    private boolean positionsSuivantesLibres(){
+    	//On regarde toutes les coordonnées de base
+    	for (int i = 0; i < this.current_pos.length; i++) {
+    		int x = this.next_pos[i][0];
+    		int y = this.next_pos[i][1];
+    		if (x > LARGEUR || y > TAILLE) {
+				return false;
+			}
+    		if (this.plateau[x][y] != Couleur.EMPTY) {
+				return false;
+			}
+		}
+    	return true;
      }
 
-    public void emptyCases(){
-        for(int i=0;i<4;i++){
-            this.plateau[current_pos[0][i]][current_pos[1][i]] = Couleur.EMPTY;
-        }
+    private void emptyCases(){
+    	for (int i = 0; i < this.current_pos.length; i++) {
+    		int x = this.current_pos[i][0];
+    		int y = this.current_pos[i][1];
+    		this.plateau[x][y] = Couleur.EMPTY;
+		}
     }
 
-    public void colourCases(Couleur c){
-        for(int i=0;i<4;i++){
-            this.plateau[next_pos[0][i]][next_pos[1][i]] = c;
-        }
+    private void colourCases(){
+        for (int i = 0; i < this.next_pos.length; i++) {
+    		int x = this.next_pos[i][0];
+    		int y = this.next_pos[i][1];
+    		this.plateau[x][y] = this.blocCourant.getCouleur();
+		}
     }
     
      public boolean goDown(){
-        boolean success = checkIfOccupied();
-        if(!success){
-            return success;
-        }
+    	 //Calcul des positions suivantes
+    	 //Pour chaque ligne, on augmente de 1 le num de ligne (x)
+    	 for (int i = 0; i < this.current_pos.length; i++) {
+     		this.next_pos[i][0] = this.current_pos[i][0] + 1;
+ 		}
+    	 
+    	 if (this.positionsSuivantesLibres() == false) {
+			return false;
+		}
         emptyCases();
-        colourCases(Couleur.RED);
-        affi.rafraichir(toChar());
-        return success;
+        colourCases();
+        this.current_pos = this.next_pos;
+        return true;
     }
 
      
