@@ -20,12 +20,8 @@ public class Plateau{
         affi = new Affichage(TAILLE+2, LARGEUR+2);
         affi.init();
     }
-<<<<<<< HEAD
-    String toChar(Object plateau[][]){
-=======
 
     String toChar(){
->>>>>>> 16478ebd95564f41178f3aaa0892e2d1cc514ef6
         String res="|";
         for(int i =0;i<TAILLE;i+=1){
             for(int y =0;y<LARGEUR;y+=1){

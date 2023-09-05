@@ -15,16 +15,15 @@ Durant ce sprint, on a pu aborder les fonctionnalités de base du jeu, c'est-à-
 ## Rétrospective
 
 ### Sur quoi avons nous butté ?
-Lister ici tout ce qui était un peut moins bien que parfait.
-* Avez-vous terminé tout ce que vous vous étiez engagé à faire ?
-* Étiez -vous prêts au moment de la démo ?
-* ...
+
+ - Difficulté à trouver notre structure de base
+ - Difficulté sur git
+ - Mauvaise gestion du temps donc nous avons pas pu terminé ce que nous nous somme engagé à faire.
+ - pas de demo
 
 ### PDCA
-* De tous ces éléments quel est celui que vous voulez améliorer ?
-* Comment pouvez-vous mesurer qu'il s'améliore ?
-* Quelles sont toutes les options possible pour l'améliorer ?
-* Qu'allez-vous tester pour l'améliorer ?
+
+De tous les éléments, celui qu'on veut améliorer est le Plan, on peut mésuser s'il s'améliore en vérifiant les résultats dans le check. On peut l'améliorer en surestimant le temps qu'une tache pourrait nous prendre afin d'être sur d'avoir bien le temps.
 
 # Mémo
-N’oubliez pas d’ajouter une photo du radiateur d’information au moment de la rétrospective.
+![radiateur](image.png)
