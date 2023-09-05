@@ -1,5 +1,4 @@
-
-public class Plateau{
+public class Plateau {
     public static final int LARGEUR = 8;
     public static final int HAUTEUR = 20;
     //This will be a matrix of colours (enum for each block)
@@ -9,7 +8,7 @@ public class Plateau{
     private int[][] next_pos = new int[2][4];
     private Affichage affi;
     private TypeBloc blocCourant;
-	Joueur joueur;
+    private Joueur joueur;
 
     public Plateau(String joueur_nom){
         plateauActuel = new Couleur[HAUTEUR][LARGEUR];
@@ -21,7 +20,7 @@ public class Plateau{
                 //Replace this with enum colour
             }
         }
-		joueur = new Joueur(joueur_nom);
+        joueur = new Joueur(joueur_nom);
     }
     
     public boolean ajouterBloc(TypeBloc bloc) {
@@ -32,10 +31,12 @@ public class Plateau{
     	//Dispo dans le tableau actuel ?
     	if (this.positionsSuivantesLibres() == false) {
 			return false;
+		} else {
+			//On l'ajoute dans le tableau suivant
+	    	this.colourCases();
+	    	return true;
 		}
-    	//On l'ajoute dans le tableau suivant
-    	this.colourCases();
-    	return true;
+    	
     }
 
     public String toString(){
@@ -82,6 +83,7 @@ public class Plateau{
     		int numColonne = this.next_pos[i][1];
     		this.plateauSuivant[numLigne][numColonne] = this.blocCourant.getCouleur();
 		}
+        int x = 0;
     }
     
     private int[][] calculerPositionsSuivante(int[][] positionsPrecedentes) {
@@ -93,13 +95,21 @@ public class Plateau{
     	return result;
     }
     
+    private void copiePlateau() {
+    	for (int i = 0; i < this.plateauActuel.length; i++) {
+			for (int j = 0; j < plateauActuel[i].length; j++) {
+				this.plateauActuel[i][j] = this.plateauSuivant[i][j];
+			}
+		}
+    }
+    
      public boolean goDown(){
     	 //Calcul des positions suivantes
     	 this.next_pos = this.calculerPositionsSuivante(this.current_pos);
     	 
     	 if (this.positionsSuivantesLibres() == false) {
     		 //Fin de la chute, on copie le plateau suivant
-    		 this.plateauActuel = this.plateauSuivant;
+    		 this.copiePlateau();
 			return false;
 		}
 
@@ -108,87 +118,79 @@ public class Plateau{
         this.current_pos = this.next_pos;
         return true;
     }
-
-	
-	///////////////////////// Lignes Pleines ////////////////////////////
-    /// Pour commencer la verification des lignes, appel Calculat
-
-	public boolean lignePleine(int numLigne){
-        boolean pleine = true;
-        int i = 0;
-        while(pleine && i < LARGEUR){
-            if(plateauActuel[numLigne][i] == Couleur.EMPTY){
-                pleine = false;
-            }else{
-                i++;
-            }
-        }
-
-        return pleine;
-    }
-
-    //Vide ligne
-    public void videLigne(int numLigne){
-        for(int i = 0; i< LARGEUR;i++){
-            plateauActuel[i][numLigne] = Couleur.EMPTY;
-        }
-    }
-
-    //Move rest down one
-    public void descenteLignes(int numLigne){
-        for(int i = numLigne;i>0;i--){
-            for(int j = 0 ; j<LARGEUR;j++){
-                plateauActuel[j][i] = plateauActuel[j][i-1];
-            }
-        }
-    }
-
-    //Loop through all the lines - count number of full lines for points later
-    public int verifiePlateau(){
-        int nbLignes = 0;
-        for(int i=0;i<HAUTEUR;i++){
-            if(lignePleine(i)){
-                videLigne(i);
-                descenteLignes(i);
-                nbLignes++; 
-            }
-        }
-        return nbLignes;
-    }
-
-    // public void displayPlateau(){
-    //     for(int i=0;i<HAUTEUR;i++){
-    //         System.out.print(i + ". ");
-    //         for(int j=0;j<LARGEUR;j++){
-    //             System.out.println(plateauActuel[j][i]);
-    //         }
-    //         System.out.println();
-    //     }
-    // }
-
-	//Pour faire la partie score, on a besoin d'un joueur
-
-	public int calculateScore(int oldScore){
-        int toAdd = verifiePlateau();
-        switch(toAdd){
-            case 1:
-                toAdd = 100;
-            case 2:
-                toAdd = 300;
-            case 3:
-                toAdd = 500;
-            case 4:
-                toAdd = 800;
-        }
-
-        joueur.setScore(oldScore + toAdd);
-        return oldScore + toAdd;
-    }
-
      
+ 	///////////////////////// Lignes Pleines ////////////////////////////
+     /// Pour commencer la verification des lignes, appel Calculat
 
+ 	public boolean lignePleine(int numLigne){
+         boolean pleine = true;
+         int i = 0;
+         while(pleine && i < LARGEUR){
+             if(plateauActuel[numLigne][i] == Couleur.EMPTY){
+                 pleine = false;
+             }else{
+                 i++;
+             }
+         }
 
+         return pleine;
+     }
 
+     //Vide ligne
+     public void videLigne(int numLigne){
+         for(int i = 0; i< LARGEUR;i++){
+             plateauActuel[i][numLigne] = Couleur.EMPTY;
+         }
+     }
 
+     //Move rest down one
+     public void descenteLignes(int numLigne){
+         for(int i = numLigne;i>0;i--){
+             for(int j = 0 ; j<LARGEUR;j++){
+                 plateauActuel[j][i] = plateauActuel[j][i-1];
+             }
+         }
+     }
 
+     //Loop through all the lines - count number of full lines for points later
+     public int verifiePlateau(){
+         int nbLignes = 0;
+         for(int i=0;i<HAUTEUR;i++){
+             if(lignePleine(i)){
+                 videLigne(i);
+                 descenteLignes(i);
+                 nbLignes++; 
+             }
+         }
+         return nbLignes;
+     }
+
+     // public void displayPlateau(){
+     //     for(int i=0;i<HAUTEUR;i++){
+     //         System.out.print(i + ". ");
+     //         for(int j=0;j<LARGEUR;j++){
+     //             System.out.println(plateauActuel[j][i]);
+     //         }
+     //         System.out.println();
+     //     }
+     // }
+
+ 	//Pour faire la partie score, on a besoin d'un joueur
+
+ 	public int calculateScore(int oldScore){
+         int toAdd = verifiePlateau();
+         switch(toAdd){
+             case 1:
+                 toAdd = 100;
+             case 2:
+                 toAdd = 300;
+             case 3:
+                 toAdd = 500;
+             case 4:
+                 toAdd = 800;
+         }
+
+         joueur.setScore(oldScore + toAdd);
+         return oldScore + toAdd;
+     }
 }

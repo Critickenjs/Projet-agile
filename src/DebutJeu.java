@@ -40,6 +40,10 @@ public class DebutJeu{
 			System.out.println(joueur_nom + " : " + score);
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
+        	if (ajoutBlocOk) {
+        		affichageCourant.rafraichir(plateauActuel.toString());
+			}
 		}
     }
 }
+

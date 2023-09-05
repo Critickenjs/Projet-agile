@@ -28,7 +28,7 @@ public class Affichage {
 	}
 	
 	public void rafraichir(String contenu) {
-		effacerTerminal();
+		this.init();
 		System.out.print(contenu);
 	}
 	public static void Menu() {

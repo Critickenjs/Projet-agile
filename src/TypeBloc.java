@@ -28,6 +28,5 @@ public enum TypeBloc {
 
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
-	}
-	
+	}	
 }
