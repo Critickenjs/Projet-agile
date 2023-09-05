@@ -19,7 +19,7 @@ public class DebutJeu{
     	affichageCourant.init();
         Plateau plateauActuel = new Plateau(joueur_nom);
         
-        
+        int score = 0;
         boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
         affichageCourant.rafraichir(plateauActuel.toString());
       //Tant que l'on peut ajouter une pièce
@@ -35,6 +35,9 @@ public class DebutJeu{
 				}
         		piecePeutAvancer = plateauActuel.goDown();
     		}
+			//Efface ligne + calcule du score
+			score += plateauActuel.calculateScore(score);
+			System.out.println(joueur_nom + " : " + score);
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
 		}

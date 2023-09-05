@@ -111,12 +111,13 @@ public class Plateau{
 
 	
 	///////////////////////// Lignes Pleines ////////////////////////////
+    /// Pour commencer la verification des lignes, appel Calculat
 
 	public boolean lignePleine(int numLigne){
         boolean pleine = true;
         int i = 0;
         while(pleine && i < LARGEUR){
-            if(plateauActuel[i][numLigne] == Couleur.EMPTY){
+            if(plateauActuel[numLigne][i] == Couleur.EMPTY){
                 pleine = false;
             }else{
                 i++;
