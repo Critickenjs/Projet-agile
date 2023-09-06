@@ -12,12 +12,12 @@ public class Joueur {
     private final String NOM;
     private static final File FICHIER = new File("./res/sauvegarde.txt");
 
-    Joueur(String nom){
+    Joueur(String nom) {
         this.NOM = nom;
         this.score = 0;
     }
 
-    public void setScore(int nouveauScore){
+    public void setScore(int nouveauScore) {
         this.score = nouveauScore;
     }
 
@@ -29,46 +29,48 @@ public class Joueur {
         return this.NOM;
     }
 
-    public void sauvegardeScore(){
+    public void sauvegardeScore() {
         String scoreSuperieur = "";
         String scoreInferieur = "";
         boolean ecrireNouvelleValeur = true;
         try (Scanner sc = new Scanner(FICHIER);) {
             Boolean estSuperieur = true;
             String ligne;
-            while(sc.hasNextLine() && estSuperieur){
+            while (sc.hasNextLine() && estSuperieur) {
                 ligne = sc.nextLine();
-                if (ligne != null && ligne.split(";").length == 2){
-                    if (score <= Integer.parseInt(ligne.split(";")[1])){
-                        if (NOM.equals(ligne.split(";")[0])){
+                if (ligne != null && ligne.split(";").length == 2) {
+                    if (score <= Integer.parseInt(ligne.split(";")[1])) {
+                        if (NOM.equals(ligne.split(";")[0])) {
                             ecrireNouvelleValeur = false;
                             estSuperieur = false;
                         }
-                        scoreSuperieur += ligne+"\n";
+                        scoreSuperieur += ligne + "\n";
                     } else {
                         estSuperieur = false;
-                        scoreInferieur += ligne+"\n";
+                        if (!NOM.equals(ligne.split(";")[0])) {
+                            scoreInferieur += ligne + "\n";
+                        }
                     }
                 }
             }
-            while(sc.hasNextLine() && !estSuperieur){
+            while (sc.hasNextLine() && !estSuperieur) {
                 ligne = sc.nextLine();
-                if(ligne != null && ligne.split(";").length == 2 && !NOM.equals(ligne.split(";")[0])){
-                    scoreInferieur += ligne+"\n";
+                if (ligne != null && ligne.split(";").length == 2 && !NOM.equals(ligne.split(";")[0])) {
+                    scoreInferieur += ligne + "\n";
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(FICHIER))){
-            if (ecrireNouvelleValeur){
-                bw.write(scoreSuperieur+NOM+";"+score+"\n"+scoreInferieur);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FICHIER))) {
+            if (ecrireNouvelleValeur) {
+                bw.write(scoreSuperieur + NOM + ";" + score + "\n" + scoreInferieur);
             } else {
-                bw.write(scoreSuperieur+scoreInferieur);
+                bw.write(scoreSuperieur + scoreInferieur);
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
