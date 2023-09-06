@@ -43,7 +43,7 @@ public class KeyboardListener extends Thread {
 	        	//BAS = 27-91-66
 				//ESPACE = 32
 	        	Deplacement deplacement = null;
-				int toucheCourante = reader.read();
+				int toucheCourante = reader.ready() ? reader.read() : 0;
 				if (toucheCourante == 27) {
 					toucheCourante = reader.read();
 					if (toucheCourante == 91) {
@@ -70,7 +70,7 @@ public class KeyboardListener extends Thread {
 				deplacement = null;
 			}
 	        //On réinitilialise le terminal dans une configuration normal
-            Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", "stty sane </dev/tty"}).waitFor();
+            Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", "stty " + this.configInitial + " </dev/tty"}).waitFor();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

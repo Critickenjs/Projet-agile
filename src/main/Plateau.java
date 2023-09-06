@@ -42,7 +42,43 @@ public class Plateau {
 		}
     	
     }
-
+    
+    public String toString() {
+    	String res = "";
+    	int largeurCote = (Affichage.LARGEUR_JEU - LARGEUR - 4) / 2;
+    	//Pour chaque ligne du plateau
+    	for (int i = 0; i <= this.plateauSuivant.length; i++) {
+			//On insert des espaces pour le cote gauche
+    		for (int j = 0; j <= largeurCote; j++) {
+				res += " ";
+			}
+    		//ajout des blocs
+    		if (i < this.plateauSuivant.length) {
+    			//bordure gauche
+        		res += "▌";
+    			for (int j = 0; j < this.plateauSuivant[i].length; j++) {
+        			if (this.plateauSuivant[i][j] == Couleur.EMPTY) {
+    					res += " ";
+    				} else {
+    					res += this.plateauSuivant[i][j].toString();
+    				}
+    			}
+        		//bordure droite
+        		res += "▐\r\n";
+			} else {
+				//ajout bordure du bas
+				for (int j = 0; j <= LARGEUR + 1; j++) {
+					res += "▔";
+				}
+				res += "\r\n\r\n";
+			}
+		}
+    	res += "  [←]\t      [␣]\t [→]";
+    	res += "\r\n\r\n";
+    	res += joueur.getScore() + " pts";
+    	return res;
+    }
+/*
     public String toString(){
         String res = "";
         for (int i = 0; i < this.plateauSuivant.length; i++) {
@@ -66,7 +102,7 @@ public class Plateau {
 		}
         res += " ------- \r\n " + joueur.getScore() + "\r\n -------";
          return res;
-     }
+     }*/
 
     private boolean positionsSuivantesLibres(){
     	//On regarde les coordonnées de chaque points

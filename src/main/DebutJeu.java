@@ -39,22 +39,20 @@ public class DebutJeu{
     
     public int jouer(String configInitial) {
     	//Initialisation du jeu		
-    	Affichage affichageCourant = new Affichage(Plateau.HAUTEUR+6, Plateau.LARGEUR+20);
-    	affichageCourant.init();
-        
+    	Affichage.changerTailleTerminal(Affichage.HAUTEUR_JEU, Affichage.LARGEUR_JEU, true);
         
         //Lancement du thread d'écoute
         KeyboardListener kl = new KeyboardListener(this.queue, configInitial);
 		kl.start();
         
         boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.genererPiece());
-        affichageCourant.rafraichir(plateauActuel.toString());
+        Affichage.rafraichir(plateauActuel.toString(), Affichage.HAUTEUR_JEU, Affichage.LARGEUR_JEU, false);
       //Tant que l'on peut ajouter une pièce
         while (ajoutBlocOk) {
         	//On avance la pièce tant que l'on peut
         	boolean piecePeutAvancer = this.avancerPiece();
         	while (piecePeutAvancer) {
-        		affichageCourant.rafraichir(plateauActuel.toString());
+        		Affichage.rafraichir(plateauActuel.toString(), Affichage.HAUTEUR_JEU, Affichage.LARGEUR_JEU, false);
         		piecePeutAvancer = this.avancerPiece();
     		}
 			//Efface ligne + calcule du score
@@ -62,22 +60,26 @@ public class DebutJeu{
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.genererPiece());
         	if (ajoutBlocOk) {
-        		affichageCourant.rafraichir(plateauActuel.toString());
+        		Affichage.rafraichir(plateauActuel.toString(), Affichage.HAUTEUR_JEU, Affichage.LARGEUR_JEU, false);
 			}
+		}
+        try {
+			Affichage.changerTailleTerminal(Affichage.HAUTEUR_GAMEOVER, Affichage.LARGEUR_GAMEOVER, true);
+			kl.interrupt();
+			kl.join();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
         //On peut interrompre le thread d'écoute
         kl.interrupt();
 		joueur.sauvegardeScore();
+		Affichage.setCursorVisible(true);
 		return joueur.getScore();
     }
 
     public static void main(String[] args) {
-    	String configInitial = args.length == 1 ? args[0] : "";
-    	//Il faut demander a l'utilisateur son nom
-		//Scanner nomJoueur = new Scanner(System.in);
-		//System.out.println("Entrez votre nom: ");
-		//String joueur_nom = nomJoueur.nextLine();
-		//nomJoueur.close();
+    	String configInitial = args.length == 1 ? args[0] : "sane";
 		Affichage.Menu(configInitial);
     }
 }

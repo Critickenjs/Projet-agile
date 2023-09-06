@@ -15,34 +15,38 @@ public class Affichage {
 
 	private static boolean problemeDeSaisie = false;
 	
-	private int hauteur;
-	private int largeur;
+	public static final int HAUTEUR_JEU = Plateau.HAUTEUR+6;
+	public static final int LARGEUR_JEU = Plateau.LARGEUR+20;
 	
-	public Affichage(int hauteur, int largeur) {
-		this.hauteur = hauteur;
-		this.largeur = largeur;
-	}
+	public static final int HAUTEUR_MENU = 25;
+	public static final int LARGEUR_MENU = 85;
+	
+	public static final int HAUTEUR_GAMEOVER = 18;
+	public static final int LARGEUR_GAMEOVER = 125;
 	
 	private static void effacerTerminal() {
 		System.out.print("\033c");
 	}
 	
-	private void changerTailleTerminal() {
-	    System.out.print("\033[8;" + this.hauteur + ";" + this.largeur + "t");
-	}
-
-	private static void changerTailleTerminalMenu() {
-	    System.out.print("\033[18;" + 80 + ";" + 24 + "t");
-	}
-	
-	public void init() {
-		effacerTerminal();
-		this.changerTailleTerminal();
+	public static void setCursorVisible(boolean visible) {
+		if (visible) {
+			System.out.print("\033[?25h");
+		} else {
+			System.out.print("\033[?25l");
+		}
 	}
 	
-	public void rafraichir(String contenu) {
-		this.init();
+	public static void changerTailleTerminal(int hauteur, int largeur, boolean effacer) {
+	    System.out.print("\033[8;" + hauteur + ";" + largeur + "t");
+	    if (effacer) {
+			effacerTerminal();
+		}
+	}
+	
+	public static void rafraichir(String contenu, int hauteur, int largeur, boolean cursorVisible) {
+		changerTailleTerminal(hauteur, largeur, true);
 		System.out.print(contenu);
+		setCursorVisible(cursorVisible);
 	}
 
 	private static String recupererLogo(){
@@ -117,7 +121,7 @@ public class Affichage {
 	private static String demanderNomJoueur(){
 		scanner.nextLine();
 		effacerTerminal();
-		animationMenu("Veuillez inscrire vôtre pseudo : ");
+		animationMenu("Veuillez inscrire votre pseudo : ");
 		String pseudo = scanner.nextLine();
 		while (pseudo.length() > 32){
 			animationMenu(ANSI_YELLOW+"Pseudo Trop Long ! Veuillez donner un pseudo inferieur ou égale à 32."+ANSI_RESET+"\n\nVeuillez inscrire vôtre pseudo : ");
@@ -230,7 +234,7 @@ public class Affichage {
 	}
 
 	public static void Menu(String configInitial) {
-		changerTailleTerminalMenu();
+		changerTailleTerminal(HAUTEUR_MENU, LARGEUR_MENU, true);
 		animationAllumage();
 		animationMenu(ANSI_YELLOW+"CLIQUER SUR ENTRER "+ANSI_RESET);
 		scanner.nextLine();
@@ -248,8 +252,8 @@ public class Affichage {
 				int score;
 				DebutJeu partie = new DebutJeu(demanderNomJoueur());
     			score = partie.jouer(configInitial);
-				changerTailleTerminalMenu();
 				afficherFinPartie(score);
+				changerTailleTerminal(HAUTEUR_MENU, LARGEUR_MENU, true);
 			} else if(nombre == 2) {
 				afficherClassement();
 			}
