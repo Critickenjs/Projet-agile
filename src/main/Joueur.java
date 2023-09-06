@@ -37,7 +37,7 @@ public class Joueur {
             String ligne;
             while(sc.hasNextLine() && estSuperieur){
                 ligne = sc.nextLine();
-                if (ligne.split(";").length == 2){
+                if (ligne != null && ligne.split(";").length == 2){
                     if (score <= Integer.parseInt(ligne.split(";")[1])){
                         if (NOM.equals(ligne.split(";")[0])){
                             ecrireNouvelleValeur = false;
@@ -48,13 +48,11 @@ public class Joueur {
                         estSuperieur = false;
                         scoreInferieur += ligne+"\n";
                     }
-                } else if (ligne == ""){
-                    scoreSuperieur += ligne+"\n";
                 }
             }
             while(sc.hasNextLine() && !estSuperieur){
                 ligne = sc.nextLine();
-                if(ligne.split(";").length == 2 && !NOM.equals(ligne.split(";")[0])){
+                if(ligne != null && ligne.split(";").length == 2 && !NOM.equals(ligne.split(";")[0])){
                     scoreInferieur += ligne+"\n";
                 }
             }

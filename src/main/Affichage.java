@@ -54,35 +54,35 @@ public class Affichage {
 					+"\n\n\n Bienvenue dans blocks un jeu cool.\n\n";
 	}
 
-	private static void attendre(){
+	private static void attendre(int miliseconde){
 		try {
-			Thread.sleep(150);
+			Thread.sleep(miliseconde);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private static void animationAllumage(){
-		attendre();
+		attendre(150);
 		String[] logo = recupererLogo().split("\n");
-		for (int i=logo.length; i>0; i--){
+		for (int i=logo.length; i>=0; i--){
 			effacerTerminal();
 			for(int y=i; y<logo.length; y++){
 				System.out.print(logo[y]+"\n");
 			}
-			attendre();
+			attendre(150);
 		}
 	}
 
 	private static void animationExtinction(){
-		attendre();
+		attendre(150);
 		String[] logo = recupererLogo().split("\n");
-		for (int i=logo.length; i>0; i--){
+		for (int i=logo.length; i>=0; i--){
 			effacerTerminal();
 			for(int y=0; y<i; y++){
 				System.out.print(logo[y]+"\n");
 			}
-			attendre();
+			attendre(150);
 		}
 	}
 
@@ -91,32 +91,33 @@ public class Affichage {
 		try {
 			contenu = scanner.nextInt();
 			if (contenu < min || contenu > max){
-				throw new SaisieInvalide();
+				throw new SaisieInvalideException();
 			}
-		} catch (InputMismatchException | SaisieInvalide e){
+		} catch (InputMismatchException | SaisieInvalideException e){
 			problemeDeSaisie = true;
 			scanner.nextLine();
 		}
 		return contenu;
 	}
 
-	private static void afficherErreurSaisie(){
+	private static String afficherErreurSaisie(){
 		if (problemeDeSaisie){
 			problemeDeSaisie = false;
-			System.out.print(ANSI_YELLOW+"Erreur de saisie !\nVeuillez saissir un chiffre entre 1 et 3.\n\n"+ANSI_RESET);
+			return ANSI_YELLOW+"Erreur de saisie !\nVeuillez saissir un chiffre entre 1 et 3.\n\n"+ANSI_RESET;
 		}
+		return "";
 	}
 
 	private static void menuJouer(){
 		int nombre = -1;
 		while(nombre != 3){
 			effacerTerminal();
-			System.out.print(recupererLogo());
-			System.out.println("1.Mode Simple\n");
-			System.out.println("2.Mode Difficile\n");
-			System.out.println(ANSI_RED+"3.Retour\n"+ANSI_RESET);
-			afficherErreurSaisie();
-			System.out.print("Choix : ");
+			animationMenu("1.Mode Simple\n\n"
+						  +"2.Mode Difficile\n\n"
+						  +ANSI_RED+"3.Retour\n\n"+ANSI_RESET
+						  +afficherErreurSaisie()
+						  +"Choix : "
+			);
 			nombre = recupererEntrerUtilisateur(1,3);
 			if (nombre == 1){
 				// Mode Simple
@@ -125,6 +126,48 @@ public class Affichage {
 			}
 			affichePlateau();
 		}
+	}
+
+	private static int chercheMaxLongueurNom(String[] listeDesNoms){
+		int indexSeparateur = listeDesNoms[0].lastIndexOf(";");
+		int max = listeDesNoms[0].substring(0, indexSeparateur).length();
+		for (int i=1; i<listeDesNoms.length; i++){
+			indexSeparateur = listeDesNoms[i].lastIndexOf(";");
+			if (max < listeDesNoms[i].substring(0, indexSeparateur).length()){
+				max = listeDesNoms[i].substring(0, indexSeparateur).length();
+			}
+		}
+		return max;
+	}
+
+	private static String[] recupeNom(String[] classement){
+		for (int i=0; i<classement.length; i++){
+			classement[i].substring(0,classement[i].lastIndexOf(";"));
+		}
+		return classement;
+	}
+
+	private static String repeteCaractere(int nbr, char caractere){
+		String repetition = "";
+		for (int i=0; i<nbr; i++){
+			repetition += caractere;
+		}
+		return repetition;
+	}
+
+	private static String[] insertEspace(String[] classement){
+		int indexSeparateur;
+		String nom;
+		String score;
+		int longueurMaxNom = chercheMaxLongueurNom(recupeNom(classement));
+		int longueurMaxScore = classement[0].substring(classement[0].lastIndexOf(";")+1,classement[0].length()).length();
+		for (int i=0; i<classement.length; i++){
+			indexSeparateur = classement[i].lastIndexOf(";");
+			nom = classement[i].substring(0,indexSeparateur);
+			score = classement[i].substring(indexSeparateur+1,classement[i].length());
+			classement[i] = nom+repeteCaractere(longueurMaxNom-nom.length(),' ')+" | "+repeteCaractere(longueurMaxScore-score.length(),' ')+score;
+		}
+		return classement;
 	}
 
 	private static void afficherClassement(){
@@ -136,13 +179,25 @@ public class Affichage {
 		} else {
 			limite = NB_SCORE_AFFICHER;
 		}
+		resultat = insertEspace(resultat);
 		for (int i=0; i<limite; i++){
-			scores += (i+1)+". "+resultat[i].replace(';', '|')+"\n\n";
+			scores += (i+1)+". "+resultat[i]+"\n\n";
 		}
 		effacerTerminal();
-		System.out.print("Classement des Meilleurs Scores : \n\n"+scores+ANSI_YELLOW+"\nAppuyer sur Entrer pour Revenir au Menu Principale "+ANSI_RESET);
+		animationMenu("Classement des Meilleurs Scores : \n\n"
+					  +scores
+					  +ANSI_YELLOW+"\nAppuyer sur Entrer pour Revenir au Menu Principale "+ANSI_RESET
+		);
 		scanner.nextLine();
 		scanner.nextLine();
+	}
+
+	private static void animationMenu(String diversChoix){
+		for (int i=0; i<=diversChoix.length(); i++){
+			effacerTerminal();
+			System.out.print(recupererLogo()+diversChoix.substring(0, i));
+			attendre(2000/diversChoix.length());
+		}
 	}
 
 	public static void Menu() {
@@ -150,12 +205,12 @@ public class Affichage {
 		int nombre = -1;
 		while(nombre != 3){
 			effacerTerminal();
-			System.out.print(recupererLogo());
-			System.out.println("1.Jouer\n");
-			System.out.println("2.Tableau des scores\n");
-			System.out.println(ANSI_RED+"3.Quitter\n"+ANSI_RESET);
-			afficherErreurSaisie();
-			System.out.print("Choix : ");
+			animationMenu("1.Jouer\n\n"
+						  +"2.Tableau des scores\n\n"
+						  +ANSI_RED+"3.Quitter\n\n"+ANSI_RESET
+						  +afficherErreurSaisie()
+						  +"Choix : "
+			);
 			nombre = recupererEntrerUtilisateur(1,3);
 			if(nombre == 1) {
 				menuJouer();

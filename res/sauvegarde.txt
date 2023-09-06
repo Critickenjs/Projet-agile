@@ -1,3 +1,7 @@
-titi;120
-toto;110
-tata;100
+Baste;1000000000000000000000000000000000000000000000
+titi;13000000000
+toto;21000
+tata;1001
+unNomBeaucoupTropLong;100
+EncoreUnNomAleatoire;15
+JeSuisLeMeilleur;0
