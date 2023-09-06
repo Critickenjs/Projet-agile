@@ -39,7 +39,7 @@ public class DebutJeu{
     	return this.plateauActuel.goDown();
     }
     
-    private void jouer(String configInitial) {
+    public void jouer(String configInitial) {
     	//Initialisation du jeu		
     	Affichage affichageCourant = new Affichage(Plateau.HAUTEUR+2, Plateau.LARGEUR+2);
     	affichageCourant.init();
@@ -79,7 +79,6 @@ public class DebutJeu{
 		//System.out.println("Entrez votre nom: ");
 		//String joueur_nom = nomJoueur.nextLine();
 		//nomJoueur.close();
-    	DebutJeu partie = new DebutJeu("k");
-    	partie.jouer(configInitial);
+		Affichage.Menu(configInitial);
     }
 }

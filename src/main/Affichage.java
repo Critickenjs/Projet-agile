@@ -29,6 +29,10 @@ public class Affichage {
 	private void changerTailleTerminal() {
 	    System.out.print("\033[8;" + this.hauteur + ";" + this.largeur + "t");
 	}
+
+	private static void changerTailleTerminalMenu() {
+	    System.out.print("\033[18;" + 18 + ";" + 80 + "t");
+	}
 	
 	public void init() {
 		effacerTerminal();
@@ -109,7 +113,19 @@ public class Affichage {
 		return "";
 	}
 
-	private static void menuJouer(){
+	private static String demanderNomJoueur(){
+		scanner.nextLine();
+		effacerTerminal();
+		animationMenu("Veuillez inscrire vôtre pseudo : ");
+		String pseudo = scanner.nextLine();
+		while (pseudo.length() > 32){
+			animationMenu(ANSI_YELLOW+"Pseudo Trop Long ! Veuillez donner un pseudo inferieur ou égale à 32."+ANSI_RESET+"\n\nVeuillez inscrire vôtre pseudo : ");
+			pseudo = scanner.nextLine();
+		}
+		return pseudo;
+	}
+
+	private static void menuJouer(String configInitial){
 		int nombre = -1;
 		while(nombre != 3){
 			effacerTerminal();
@@ -122,10 +138,12 @@ public class Affichage {
 			nombre = recupererEntrerUtilisateur(1,3);
 			if (nombre == 1){
 				// Mode Simple
+				DebutJeu partie = new DebutJeu(demanderNomJoueur());
+    			partie.jouer(configInitial);
+				changerTailleTerminalMenu();
 			} else if (nombre == 2){
 				// Mode Difficile
 			}
-			affichePlateau();
 		}
 	}
 
@@ -207,7 +225,7 @@ public class Affichage {
 		}
 	}
 
-	public static void Menu() {
+	public static void Menu(String configInitial) {
 		animationAllumage();
 		int nombre = -1;
 		while(nombre != 3){
@@ -220,7 +238,7 @@ public class Affichage {
 			);
 			nombre = recupererEntrerUtilisateur(1,3);
 			if(nombre == 1) {
-				menuJouer();
+				menuJouer(configInitial);
 			} else if(nombre == 2) {
 				afficherClassement();
 			}
@@ -228,6 +246,7 @@ public class Affichage {
 		animationExtinction();
 		effacerTerminal();
 	}
+
 	public static void affichePlateau() {
 		System.out.println("Score:\n"
 						 + "__________\n"
@@ -267,8 +286,5 @@ public class Affichage {
 						+ "|            |\n"
 						+ "|            |\n"
 						+ "--------------\n");
-	}
-	public static void main(String[] args) {
-		Menu();
 	}
 }
