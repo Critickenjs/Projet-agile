@@ -72,16 +72,4 @@ public class Joueur {
             e.printStackTrace();
         }
     }
-
-    public static String recupeScore(){
-        String content = "";
-        try (Scanner sc = new Scanner(FICHIER);) {
-            while(sc.hasNextLine()){
-                content += sc.nextLine()+"\n";
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
 }

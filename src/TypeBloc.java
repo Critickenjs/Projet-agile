@@ -86,5 +86,5 @@ public enum TypeBloc {
 		System.out.println(tabToString(calculerRotation(Coin22)));
 		System.out.println(tabToString(calculerRotation(Coin23)));
 		System.out.println(tabToString(calculerRotation(Zig2)));
-	}
+	}	
 }
