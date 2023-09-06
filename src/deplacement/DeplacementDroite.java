@@ -11,5 +11,10 @@ public class DeplacementDroite implements Deplacement{
         }
         return result;
     }
+
+	@Override
+	public boolean estRotation() {
+		return false;
+	}
     
 }

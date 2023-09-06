@@ -2,7 +2,7 @@ package deplacement;
 
 import main.TypeBloc;
 
-public class DeplacementBas implements Deplacement{
+public class DeplacementBas implements Deplacement {
 
     public int[][] deplacement(int[][] positionsPrecedentes, TypeBloc piece){
         int[][] result = new int[4][2];
@@ -12,4 +12,9 @@ public class DeplacementBas implements Deplacement{
         }
         return result;
     }
+
+	@Override
+	public boolean estRotation() {
+		return false;
+	}
 }

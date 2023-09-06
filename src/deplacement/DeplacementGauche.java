@@ -11,5 +11,11 @@ public class DeplacementGauche implements Deplacement{
         }
         return result;
     }
+
+	@Override
+	public boolean estRotation() {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
 }
