@@ -1,9 +1,7 @@
 package main;
-import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import deplacement.Deplacement;
-import deplacement.DeplacementBas;
 import listener.KeyboardListener;
 
 public class DebutJeu{
@@ -63,8 +61,7 @@ public class DebutJeu{
         		piecePeutAvancer = this.avancerPiece();
     		}
 			//Efface ligne + calcule du score
-			score += plateauActuel.calculateScore(score);
-			System.out.println(nomJoueur + " : " + score);
+			score += plateauActuel.calculateScore();
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
         	if (ajoutBlocOk) {
