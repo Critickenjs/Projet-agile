@@ -174,32 +174,33 @@ public class Plateau {
  	///////////////////////// Lignes Pleines ////////////////////////////
      /// Pour commencer la verification des lignes, appel Calculat
 
- 	public boolean lignePleine(int numLigne){
-         boolean pleine = true;
-         int i = 0;
-         while(pleine && i < LARGEUR){
-             if(plateauActuel[numLigne][i] == Couleur.EMPTY){
-                 pleine = false;
-             }else{
-                 i++;
-             }
-         }
+    public boolean lignePleine(int numLigne){
+        boolean pleine = true;
+        int i = 0;
+        while(pleine && i < LARGEUR){
+            if(plateauActuel[numLigne][i] == Couleur.EMPTY){
+                pleine = false;
+            }else{
+                i++;
+            }
+        }
 
          return pleine;
+        
      }
 
-     //Vide ligne
-     public void videLigne(int numLigne){
-         for(int i = 0; i< LARGEUR;i++){
-             plateauActuel[numLigne][i] = Couleur.EMPTY;
-         }
-     }
+ 	//Vide ligne
+    public void videLigne(int numLigne){
+        for(int i = 0; i< LARGEUR;i++){
+            plateauSuivant[numLigne][i] = Couleur.EMPTY;
+        }
+    }
 
-     //Move rest down one
+   //Move rest down one
      public void descenteLignes(int numLigne){
          for(int i = numLigne;i>0;i--){
              for(int j = 0 ; j<LARGEUR;j++){
-                 plateauActuel[i][j] = plateauActuel[i-1][j];
+                 plateauSuivant[i][j] = plateauSuivant[i-1][j];
              }
          }
      }
@@ -214,6 +215,7 @@ public class Plateau {
                  nbLignes++; 
              }
          }
+         this.copiePlateau();
          return nbLignes;
      }
 
@@ -229,7 +231,8 @@ public class Plateau {
 
  	//Pour faire la partie score, on a besoin d'un joueur
 
- 	public int calculateScore(int oldScore){
+     public int calculateScore(){
+         int oldScore = joueur.getScore();
          int toAdd = verifiePlateau();
          switch(toAdd){
              case 1:
@@ -244,5 +247,5 @@ public class Plateau {
 
          joueur.setScore(oldScore + toAdd);
          return oldScore + toAdd;
-     }
+      }
 }
