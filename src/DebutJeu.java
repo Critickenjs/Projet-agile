@@ -42,7 +42,7 @@ public class DebutJeu{
 			//Efface ligne + calcule du score
 			// int nbLignes = plateauActuel.verifiePlateau();
 			// affichageCourant.rafraichir(plateauActuel.toString());
-			score += plateauActuel.calculateScore(score);
+			score = plateauActuel.calculateScore();
 			affichageCourant.rafraichir(plateauActuel.toString());
 			System.out.println(joueur_nom + " : " + score);
         	//Ajout d'une pièce

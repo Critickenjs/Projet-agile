@@ -179,20 +179,21 @@ public class Plateau {
 
  	//Pour faire la partie score, on a besoin d'un joueur
 
- 	public int calculateScore(int oldScore){
-         int toAdd = verifiePlateau();
-         switch(toAdd){
-             case 1:
-                 toAdd = 100;
-             case 2:
-                 toAdd = 300;
-             case 3:
-                 toAdd = 500;
-             case 4:
-                 toAdd = 800;
-         }
+ 	public int calculateScore(){
+        int oldScore = joueur.getScore();
+        int toAdd = verifiePlateau();
+        switch(toAdd){
+            case 1:
+                toAdd = 100;
+            case 2:
+                toAdd = 300;
+            case 3:
+                toAdd = 500;
+            case 4:
+                toAdd = 800;
+        }
 
-         joueur.setScore(oldScore + toAdd);
-         return oldScore + toAdd;
+        joueur.setScore(oldScore + toAdd);
+        return oldScore + toAdd;
      }
 }
