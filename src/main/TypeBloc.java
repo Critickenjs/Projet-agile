@@ -2,19 +2,56 @@ package main;
 
 public enum TypeBloc {
 	
-	Carre(new int[][]{{3,0},{3,1},{2,0},{2,1}},Couleur.BLUE),Ligne(new int[][]{{3,0},{3,1},{3,2},{2,3}},Couleur.GREEN),
-	Zig(new int[][]{{3,0},{3,1},{2,1},{2,2}},Couleur.RED),Zag(new int[][]{{3,0},{2,0},{2,1},{1,1}},Couleur.YELLOW),
-	T(new int[][]{{3,0},{3,1},{3,2},{2,1}},Couleur.PURPLE),Coin1(new int[][]{{3,0},{3,1},{2,1},{1,1}},Couleur.ORANGE),
-	Coin2(new int[][]{{3,0},{3,1},{2,1},{1,1}},Couleur.CYAN),Ligne2(new int[][]{{3,0},{2,0},{1,0},{0,0}},Couleur.GREEN);
+	Carre(new int[][]{{3,0},{3,1},{2,0},{2,1}},Couleur.BLUE,"Carre"),
+
+
+	Ligne1(new int[][]{{3,0},{3,1},{3,2},{3,3}},Couleur.GREEN,"Ligne2"),
+	Ligne2(new int[][]{{3,0},{2,0},{1,0},{0,0}},Couleur.GREEN,"Ligne1"),
+
+
+	Zig(new int[][]{{1,0},{2,0},{2,1},{3,1}},Couleur.RED,"Zig1"),
+	Zig1(new int[][]{{3,0},{3,1},{2,1},{2,2}},Couleur.RED,"Zig"),
+
+	Zag(new int[][]{{3,0},{2,0},{2,1},{1,1}},Couleur.YELLOW,"Zag1"),
+	Zag1(new int[][]{{2,0},{2,1},{3,1},{3,2}},Couleur.YELLOW,"Zag"),
+
+	T1(new int[][]{{3,0},{3,1},{3,2},{2,1}},Couleur.PURPLE,"T2"),
+	T2(new int[][]{{1,0},{2,0},{2,1},{3,0}},Couleur.PURPLE,"T3"),
+	T3(new int[][]{{2,0},{2,1},{2,2},{3,1}},Couleur.PURPLE,"T4"),
+	T4(new int[][]{{2,0},{1,1},{2,1},{3,1}},Couleur.PURPLE,"T1"),
+
+
+	Coin11(new int[][]{{3,0},{3,1},{2,1},{1,1}},Couleur.ORANGE,"Coin12"),
+	Coin12(new int[][]{{2,0},{3,0},{3,1},{3,2}},Couleur.ORANGE,"Coin13"),
+	Coin13(new int[][]{{1,1},{1,0},{2,0},{3,0}},Couleur.ORANGE,"Coin14"),
+	Coin14(new int[][]{{2,0},{2,1},{2,2},{3,2}},Couleur.ORANGE,"Coin11"),
+
+
+
+	Coin21(new int[][]{{1,0},{3,1},{2,1},{1,1}},Couleur.CYAN,"Coin22"),
+	Coin22(new int[][]{{2,2},{2,1},{2,0},{3,0}},Couleur.CYAN,"Coin23"),
+	Coin23(new int[][]{{1,0},{2,0},{3,0},{3,1}},Couleur.CYAN,"Coin24"),
+	Coin24(new int[][]{{3,0},{3,1},{3,2},{2,2}},Couleur.CYAN,"Coin21");
+
+
+
+	
 	
 	int[][]coordonnees;
 	Couleur couleur;
+	String suivant;
+
 	
-	TypeBloc(int[][]coordonnees, Couleur couleur){
+	TypeBloc(int[][]coordonnees, Couleur couleur, String suivant){
 		this.coordonnees = coordonnees;
 		this.couleur = couleur;
+		this.suivant = suivant;
 	}
 
+
+	public TypeBloc getPieceSuivante(){
+		return TypeBloc.valueOf(suivant);
+	}
 	public int[][] getCoordonnees() {
 		return coordonnees;
 	}
