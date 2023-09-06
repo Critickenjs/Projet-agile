@@ -9,6 +9,7 @@ public class Plateau {
     private Affichage affi;
     private TypeBloc blocCourant;
     private Joueur joueur;
+    private int speed;
 
     
     public Plateau(String joueur_nom){
@@ -22,6 +23,15 @@ public class Plateau {
             }
         }
         joueur = new Joueur(joueur_nom);
+        speed = 300;
+    }
+
+    public int getSpeed(){
+        return speed;
+    }
+
+    public void setSpeed(int speed){
+        this.speed = speed;
     }
     
     public boolean ajouterBloc(TypeBloc bloc) {

@@ -8,6 +8,7 @@ public class DebutJeu{
 
     public static void main(String[] args) {
 		int i = 0;
+		int speedUp = 1500;
     	//Initialisation du jeu
 
 		//Il faut demander a l'utilisateur son nom, mettre dans 
@@ -33,7 +34,7 @@ public class DebutJeu{
         	while (piecePeutAvancer) {
         		affichageCourant.rafraichir(plateauActuel.toString());
         		try {
-					Thread.sleep(100);
+					Thread.sleep(plateauActuel.getSpeed());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -45,6 +46,13 @@ public class DebutJeu{
 			score = plateauActuel.calculateScore();
 			affichageCourant.rafraichir(plateauActuel.toString());
 			System.out.println(joueur_nom + " : " + score);
+			//Test for speed up - every 1500 points, it speeds up by 10
+			if(score>speedUp){
+				if(plateauActuel.getSpeed() > 50){
+					plateauActuel.setSpeed(plateauActuel.getSpeed()-10);
+				}
+				speedUp+=1500;
+			}
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
         	if (ajoutBlocOk) {
