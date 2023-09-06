@@ -79,7 +79,7 @@ public enum TypeBloc {
 	}*/
 	public static int[][] calculerRotation(TypeBloc piece) {
 		int[][] res= null;
-		if(piece.couleur.equals(TypeBloc.Carre.couleur) || piece.couleur.equals(Ligne.couleur)) {
+		if(piece.couleur.equals(TypeBloc.Carre.couleur) || piece.couleur.equals(Ligne1.couleur)) {
 			int[][] coordonneesOriginales = piece.getCoordonnees();
 		    int[][] nouvellesCoordonnees = new int[coordonneesOriginales.length][2];
 		    for (int i = 0; i < coordonneesOriginales.length; i++) {

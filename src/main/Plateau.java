@@ -1,6 +1,7 @@
 package main;
 import deplacement.Deplacement;
 import deplacement.DeplacementBas;
+import deplacement.DeplacementDroite;
 
 public class Plateau {
     public static final int LARGEUR = 8;
@@ -45,14 +46,23 @@ public class Plateau {
     public String toString(){
         String res = "";
         for (int i = 0; i < this.plateauSuivant.length; i++) {
-			for (int j = 0; j < this.plateauSuivant[i].length; j++) {
-				if (this.plateauSuivant[i][j] == Couleur.EMPTY) {
-					res += " ";
-				} else {
-					res += this.plateauSuivant[i][j].toString();
-				}
+			res += "\t\t |";
+            for (int j = 0; j < this.plateauSuivant[i].length; j++) {
+                if (this.plateauSuivant[i][j] == Couleur.EMPTY) {
+                    res += " ";
+                } else {
+                    res += this.plateauSuivant[i][j].toString();
+                }
+            
 			}
-			res += "\r\n" + "\033[0;34m";
+
+            res += "| ";
+            if(i == 2 || i == 4){
+                res += "\t ------------";
+            }else if(i==3){
+                res += "\t | " + joueur.getScore() + " |";
+            }
+			res += "\r\n";
 		}
          return res;
      }
@@ -93,7 +103,7 @@ public class Plateau {
     // 	for (int i = 0; i < result.length; i++) {
 	// 		result[i][0] = 1 + positionsPrecedentes[i][0];
 	// 		result[i][1] = positionsPrecedentes[i][1];
-	// 	}
+	// 	}positionsSuivantesLibres
     // 	return result;
     // }
     
@@ -107,15 +117,48 @@ public class Plateau {
     
     public boolean deplacement(Deplacement d){
         //Calcul des positions suivantes
-         this.next_pos = d.deplacement(current_pos, this.blocCourant);
-    	//  this.next_pos = this.calculerPositionsSuivante(current_pos); 
-    	 if (this.positionsSuivantesLibres() == false) {
-			return false;
-         }
-         emptyCases();
-        colourCases();
-        this.current_pos = this.next_pos;
-        return true;
+        if(d.estRotation()){
+            int ligne = 0;
+            int colonne = 0;
+            boolean found = false;
+            int i = 0;
+            while(!found && i<HAUTEUR){
+                int j = 0;
+                while(!found && j<LARGEUR){
+                    if(plateauActuel[i][j]!=Couleur.EMPTY){
+                        ligne = i;
+                        colonne = j;
+                    }
+                    j++;
+                }
+                i++;
+            }
+            int[][] nouveauCoord = d.deplacement(current_pos, blocCourant);
+            this.blocCourant = this.blocCourant.getPieceSuivante();
+
+            // GET NEW SHAPE AT THE TOP OF THE PLATEAU
+            Deplacement d1 = new DeplacementBas();
+            Deplacement d2 = new DeplacementDroite();
+            for(int l = 0;l<colonne;l++){
+                d2.deplacement(nouveauCoord, blocCourant);
+            }
+            for(int k = 0;k<ligne-1;k++){
+                d1.deplacement(nouveauCoord, blocCourant);
+            }
+            goDown();
+            
+            return true;
+        }else{
+            this.next_pos = d.deplacement(current_pos, this.blocCourant);
+            //  this.next_pos = this.calculerPositionsSuivante(current_pos); 
+            if (this.positionsSuivantesLibres() == false) {
+                return false;
+            }
+            emptyCases();
+            colourCases();
+            this.current_pos = this.next_pos;
+            return true;
+        }
     }
     
     public boolean goDown() {
@@ -152,7 +195,7 @@ public class Plateau {
 	// 	}
 
     //     emptyCases();
-    //     colourCases();
+    //     colourCases();            for(int i = 0;i<HAUTEUR;i++){
     //     this.current_pos = this.next_pos;
     //     return true;
     // }
