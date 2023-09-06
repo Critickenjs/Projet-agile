@@ -3,7 +3,7 @@
 ## Démo + Planification du sprint suivant
 
 ### Ce que nous avons fait durant ce sprint
-Durant ce sprint, on a pu aborder les fonctionnalités de base du jeu, c'est-à-dire la création et l'affichage du plateau,des blocs
+Durant ce sprint, on a pu aborder les fonctionnalités de base du jeu, c'est-à-dire la création et l'affichage du plateau,des blocs etc.
 
 ### Ce que nous allons faire durant le prochain sprint
 
@@ -31,6 +31,7 @@ De tous les éléments, celui qu'on veut améliorer est le Plan, on peut mésuse
 # Sprint 2
 
 ## Démo + Planification du sprint suivant
+Nous n'avons pas pu presenté une demo a la fin de ce sprint par manque de temps on prevoit de finir la chute d'un bloc dans le prochain sprint.
 
 ### Ce que nous avons fait durant ce sprint
 
@@ -58,6 +59,7 @@ Il y a eu un problème d'estimation de temps. De ce fait, nous avons compléteme
 # Sprint 3
 
 ## Démo + Planification du sprint suivant
+Comme démo, on a pu présenté un plateau de type tetris avec un la chute d'un bloc. on prevoit de gerer la collision des blocs dans le prochain sprint.
 
 ### Ce que nous avons fait durant ce sprint
 
@@ -80,7 +82,8 @@ Durant ce sprint , nous n'avons pas réellement butté sur quoi-que ce soit, le 
 
 
 ### PDCA
-Il y a eu un problème de check durant les derniers sprints, nous n'avons pas pris le temps de faire des test unitaire après chaque tache on propose trois solution;
+Il y a eu un problème de check durant les derniers sprints, nous n'avons pas pris le temps de faire des test unitaire après chaque tache on propose deux solution;
+
 - de augmenter l'estimation du temps par les taches afin de les comptabiliser
 
 - de prévoir une tache afin de faire tout les test unitaire durant un meme sprint.
@@ -93,19 +96,32 @@ Il y a eu un problème de check durant les derniers sprints, nous n'avons pas pr
 # Sprint 4
 
 ## Démo + Planification du sprint suivant
+On a pu présenté un plateau avec des blocs qui tombe sans arret comme à la tetris et qui s'empilent.
 
 ### Ce que nous avons fait durant ce sprint
 
+- L'affichage du score 
 
+- empiler des blocs
+
+- connaitre et appliquer les execptions.
 
 
 ### Ce que nous allons faire durant le prochain sprint
 
+- Mode infini
 
+- Gerer ROTATION
+
+- Perfectionnement du menu
+
+- Gerer deplacement
 
 ## Rétrospective
 
 ### Sur quoi avons nous butté ?
+
+on pense ne pas avoir eu de problème durant ce sprint. On n'a pas eu à identifier de problème , tout c'est dérouler comme prévu. on a pu finir ce que nous somme engagé à faire et on a pu présenté un demo.
 
 
 
@@ -113,7 +129,50 @@ Il y a eu un problème de check durant les derniers sprints, nous n'avons pas pr
 ### PDCA
 
 
+# Mémo
+![mémo 4](image/image-3.png)
+
+
+# Sprint 5
+
+## Démo + Planification du sprint suivant
+On a pu présenté un plateau avec des blocs qui tombe sans arret comme à la tetris  qui s'empilent et se déplacent.
+
+### Ce que nous avons fait durant ce sprint
+
+- Gerer deplacement
+
+
+### Ce que nous allons faire durant le prochain sprint
+
+- Mode infini
+
+- Gerer ROTATION
+
+- Perfectionnement du menu
+
+
+## Rétrospective
+
+### Sur quoi avons nous butté ?
+
+On pense ne pas avoir eu assez de temps ou mal gérer les estimations pour chaque tache, car on n'a pas pu finir les taches que nous nous sommes engagés à faire, mais on a pu présenter une démo avec des nouvelles fonctionnalités.
+
+
+
+
+### PDCA
+
+ob doit améliorer notre gestion du temps afin d'etre le plus efficace possible, on peut donc:
+
+- l'améliorer en surestimant le temps qu'une tache pourrait nous prendre afin d'être sur d'etre dans les temps.
+
+- Mieux répartir les taches afin d'etre le plus efficace possible.
+
+
 
 
 # Mémo
+![mémo 5](image/image4.png)
+
 
