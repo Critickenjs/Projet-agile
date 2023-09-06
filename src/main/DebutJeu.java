@@ -8,14 +8,12 @@ public class DebutJeu{
 	
 	private LinkedBlockingQueue<Deplacement> queue;
 	private Plateau plateauActuel;
-	private int score;
-	private String nomJoueur;
+	private Joueur joueur;
 
     public DebutJeu(String nomJoueur) {
         this.queue = new LinkedBlockingQueue<Deplacement>();
-        this.nomJoueur = nomJoueur;
+		this.joueur = new Joueur(nomJoueur);
         this.plateauActuel = new Plateau(nomJoueur);
-        this.score = 0;
     }
     
     //Cette méthode permet de faire avancer une pièce :
@@ -39,7 +37,7 @@ public class DebutJeu{
     	return this.plateauActuel.goDown();
     }
     
-    public void jouer(String configInitial) {
+    public int jouer(String configInitial) {
     	//Initialisation du jeu		
     	Affichage affichageCourant = new Affichage(Plateau.HAUTEUR+2, Plateau.LARGEUR+2);
     	affichageCourant.init();
@@ -49,7 +47,6 @@ public class DebutJeu{
         KeyboardListener kl = new KeyboardListener(this.queue, configInitial);
 		kl.start();
         
-        int score = 0;
         boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.genererPiece());
         affichageCourant.rafraichir(plateauActuel.toString());
       //Tant que l'on peut ajouter une pièce
@@ -61,7 +58,7 @@ public class DebutJeu{
         		piecePeutAvancer = this.avancerPiece();
     		}
 			//Efface ligne + calcule du score
-			score += plateauActuel.calculateScore();
+			joueur.setScore(joueur.getScore()+plateauActuel.calculateScore());
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.genererPiece());
         	if (ajoutBlocOk) {
@@ -70,6 +67,8 @@ public class DebutJeu{
 		}
         //On peut interrompre le thread d'écoute
         kl.interrupt();
+		joueur.sauvegardeScore();
+		return joueur.getScore();
     }
 
     public static void main(String[] args) {
