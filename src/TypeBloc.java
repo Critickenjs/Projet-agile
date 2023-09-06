@@ -63,28 +63,49 @@ public enum TypeBloc {
 		return res;
 	}
 	public static int[][] calculerRotation(TypeBloc piece) {
-	    int[][] coordonneesOriginales = piece.getCoordonnees();
-	    int[][] nouvellesCoordonnees = new int[coordonneesOriginales.length][2];
+		int[][] res= null;
+		if(piece.couleur.equals(TypeBloc.Carre.couleur) || piece.couleur.equals(Ligne.couleur)) {
+			int[][] coordonneesOriginales = piece.getCoordonnees();
+		    int[][] nouvellesCoordonnees = new int[coordonneesOriginales.length][2];
 
-	    for (int i = 0; i < coordonneesOriginales.length; i++) {
-	        int x = coordonneesOriginales[i][0];
-	        int y = coordonneesOriginales[i][1];
+		    for (int i = 0; i < coordonneesOriginales.length; i++) {
+		        int x = coordonneesOriginales[i][0];
+		        int y = coordonneesOriginales[i][1];
 
-	        // Appliquez la rotation de 90 degrés dans le sens horaire
-	        int newX = y;
-	        int newY = 3 - x;
+		        // Appliquez la rotation de 90 degrés dans le sens horaire
+		        int newX = y;
+		        int newY = 3 - x;
 
-	        nouvellesCoordonnees[i][0] = newX;
-	        nouvellesCoordonnees[i][1] = newY;
-	    }
+		        nouvellesCoordonnees[i][0] = newX;
+		        nouvellesCoordonnees[i][1] = newY;
+		    }
 
-	    return nouvellesCoordonnees;
+		    res = nouvellesCoordonnees;
+		}
+		if(piece.toString() == "Ligne") {
+		    res = new int[4][2];
+			int x = piece.getCoordonnees()[0][0];
+			int y = piece.getCoordonnees()[0][1];
+			for(int i=0 ; i<piece.getCoordonnees().length ; i++) {
+				res[i][0]=x-i;
+				res[i][1]=y;
+			}
+		}
+		if(piece.toString() == "Ligne2") {
+			res = new int[4][2];
+			int x = piece.getCoordonnees()[0][0];
+			for(int i=0 ; i<piece.getCoordonnees().length ; i++) {
+				res[i][0]= x;
+				res[i][1]= i;
+			}
+		}
+		return res;
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(tabToString(calculerRotation(Coin2)));
-		System.out.println(tabToString(calculerRotation(Coin22)));
-		System.out.println(tabToString(calculerRotation(Coin23)));
-		System.out.println(tabToString(calculerRotation(Zig2)));
+		TypeBloc piece = TypeBloc.Ligne;
+		System.out.println(piece.toString());
+		System.out.println(tabToString(Ligne2.getCoordonnees()));
+		System.out.println(tabToString(calculerRotation(Ligne2)));
 	}	
 }
