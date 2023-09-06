@@ -126,30 +126,6 @@ public class Affichage {
 		return pseudo;
 	}
 
-	private static void menuJouer(String configInitial){
-		int nombre = -1;
-		while(nombre != 3){
-			effacerTerminal();
-			animationMenu("1.Mode Simple\n\n"
-						  +"2.Mode Difficile\n\n"
-						  +ANSI_RED+"3.Retour\n\n"+ANSI_RESET
-						  +afficherErreurSaisie()
-						  +"Choix : "
-			);
-			nombre = recupererEntrerUtilisateur(1,3);
-			if (nombre == 1){
-				// Mode Simple
-				int score;
-				DebutJeu partie = new DebutJeu(demanderNomJoueur());
-    			score = partie.jouer(configInitial);
-				changerTailleTerminalMenu();
-				afficherFinPartie(score);
-			} else if (nombre == 2){
-				// Mode Difficile
-			}
-		}
-	}
-
 	private static int chercheMaxLongueurNom(String[] listeDesNoms){
 		int longueurNom;
 		int indexSeparateur = listeDesNoms[0].lastIndexOf(";");
@@ -269,7 +245,11 @@ public class Affichage {
 			);
 			nombre = recupererEntrerUtilisateur(1,3);
 			if(nombre == 1) {
-				menuJouer(configInitial);
+				int score;
+				DebutJeu partie = new DebutJeu(demanderNomJoueur());
+    			score = partie.jouer(configInitial);
+				changerTailleTerminalMenu();
+				afficherFinPartie(score);
 			} else if(nombre == 2) {
 				afficherClassement();
 			}
