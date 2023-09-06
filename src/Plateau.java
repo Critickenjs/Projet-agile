@@ -9,7 +9,10 @@ public class Plateau {
     private Affichage affi;
     private TypeBloc blocCourant;
     private Joueur joueur;
-
+    private Deplacement deplacementBas = new DeplacementBas();
+    private Deplacement deplacementDroite = new DeplacementDroite();
+    private Deplacement deplacementGauche = new DeplacementGauche();
+    
     public Plateau(String joueur_nom){
         plateauActuel = new Couleur[HAUTEUR][LARGEUR];
         plateauSuivant = new Couleur[HAUTEUR][LARGEUR];
@@ -59,7 +62,7 @@ public class Plateau {
     	for (int i = 0; i < this.next_pos.length; i++) {
     		int numLigne = this.next_pos[i][0];
     		int numColonne = this.next_pos[i][1];
-    		if (numLigne >= HAUTEUR || numColonne >= LARGEUR) {
+    		if (numLigne >= HAUTEUR || numColonne >= LARGEUR || numLigne < 0 || numColonne < 0) {
 				return false;
 			}
     		if (this.plateauActuel[numLigne][numColonne] != Couleur.EMPTY) {
@@ -86,14 +89,14 @@ public class Plateau {
         int x = 0;
     }
     
-    private int[][] calculerPositionsSuivante(int[][] positionsPrecedentes) {
-    	int[][] result = new int[4][2];
-    	for (int i = 0; i < result.length; i++) {
-			result[i][0] = 1 + positionsPrecedentes[i][0];
-			result[i][1] = positionsPrecedentes[i][1];
-		}
-    	return result;
-    }
+    // private int[][] calculerPositionsSuivante(int[][] positionsPrecedentes) {
+    // 	int[][] result = new int[4][2];
+    // 	for (int i = 0; i < result.length; i++) {
+	// 		result[i][0] = 1 + positionsPrecedentes[i][0];
+	// 		result[i][1] = positionsPrecedentes[i][1];
+	// 	}
+    // 	return result;
+    // }
     
     private void copiePlateau() {
     	for (int i = 0; i < this.plateauActuel.length; i++) {
@@ -103,21 +106,64 @@ public class Plateau {
 		}
     }
     
-     public boolean goDown(){
-    	 //Calcul des positions suivantes
-    	 this.next_pos = this.calculerPositionsSuivante(this.current_pos);
-    	 
+    public boolean deplacement(Deplacement d){
+        //Calcul des positions suivantes
+         this.next_pos = d.deplacement(current_pos);
+    	//  this.next_pos = this.calculerPositionsSuivante(current_pos); 
     	 if (this.positionsSuivantesLibres() == false) {
     		 //Fin de la chute, on copie le plateau suivant
     		 this.copiePlateau();
 			return false;
-		}
-
-        emptyCases();
+         }
+         emptyCases();
         colourCases();
         this.current_pos = this.next_pos;
         return true;
     }
+
+    //  public boolean goDown(){
+    // 	 //Calcul des positions suivantes
+    //      this.next_pos = deplacementBas.deplacement(current_pos);
+    // 	//  this.next_pos = this.calculerPositionsSuivante(current_pos); 
+    // 	 if (this.positionsSuivantesLibres() == false) {
+    // 		 //Fin de la chute, on copie le plateau suivant
+    // 		 this.copiePlateau();
+	// 		return false;
+	// 	}
+
+    //     emptyCases();
+    //     colourCases();
+    //     this.current_pos = this.next_pos;
+    //     return true;
+    // }
+
+    // public boolean goRight(){
+    //     this.next_pos = deplacementDroite.deplacement(current_pos);
+    //     if (this.positionsSuivantesLibres() == false) {
+    // 		 //Fin de la chute, on copie le plateau suivant
+    // 		 this.copiePlateau();
+	// 		return false;
+	// 	}
+
+    //     emptyCases();
+    //     colourCases();
+    //     this.current_pos = this.next_pos;
+    //     return true;
+    // }
+
+    // public boolean goLeft(){
+    //     this.next_pos = deplacementGauche.deplacement(current_pos);
+    //     if (this.positionsSuivantesLibres() == false) {
+    // 		 //Fin de la chute, on copie le plateau suivant
+    // 		 this.copiePlateau();
+	// 		return false;
+	// 	}
+
+    //     emptyCases();
+    //     colourCases();
+    //     this.current_pos = this.next_pos;
+    //     return true;
+    // }
      
  	///////////////////////// Lignes Pleines ////////////////////////////
      /// Pour commencer la verification des lignes, appel Calculat
@@ -139,7 +185,7 @@ public class Plateau {
      //Vide ligne
      public void videLigne(int numLigne){
          for(int i = 0; i< LARGEUR;i++){
-             plateauActuel[i][numLigne] = Couleur.EMPTY;
+             plateauActuel[numLigne][i] = Couleur.EMPTY;
          }
      }
 
@@ -147,7 +193,7 @@ public class Plateau {
      public void descenteLignes(int numLigne){
          for(int i = numLigne;i>0;i--){
              for(int j = 0 ; j<LARGEUR;j++){
-                 plateauActuel[j][i] = plateauActuel[j][i-1];
+                 plateauActuel[i][j] = plateauActuel[i-1][j];
              }
          }
      }
