@@ -44,14 +44,22 @@ public class Plateau {
     }
     
     public String toString() {
-    	String res = "";
+    	String res = "[q]";
     	int largeurCote = (Affichage.LARGEUR_JEU - LARGEUR - 4) / 2;
     	//Pour chaque ligne du plateau
     	for (int i = 0; i <= this.plateauSuivant.length; i++) {
+    		//bouton quitter
 			//On insert des espaces pour le cote gauche
-    		for (int j = 0; j <= largeurCote; j++) {
-				res += " ";
+    		if (i == 0) {
+    			for (int j = 0; j <= largeurCote - 3; j++) {
+    				res += " ";
+    			}
+			} else {
+				for (int j = 0; j <= largeurCote; j++) {
+					res += " ";
+				}
 			}
+    		
     		//ajout des blocs
     		if (i < this.plateauSuivant.length) {
     			//bordure gauche

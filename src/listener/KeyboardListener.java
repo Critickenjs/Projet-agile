@@ -42,6 +42,7 @@ public class KeyboardListener extends Thread {
 				//DROITE = 27-91-67
 	        	//BAS = 27-91-66
 				//ESPACE = 32
+	        	//Q = 113
 	        	Deplacement deplacement = null;
 				int toucheCourante = reader.ready() ? reader.read() : 0;
 				if (toucheCourante == 27) {
@@ -62,9 +63,12 @@ public class KeyboardListener extends Thread {
 				} else if (toucheCourante == 32) {
 					//ESPACE
 					deplacement = new DeplacementRotation();
+				} else if (toucheCourante == 113) {
+					//le joueur veut quitter
+					this.listening = false;
 				}
 				//On peut ajouter l'action à la queue
-				if (deplacement!= null) {
+				if (deplacement!= null && this.listening) {
 					this.queue.offer(deplacement);
 				}
 				deplacement = null;
@@ -77,6 +81,10 @@ public class KeyboardListener extends Thread {
 			e.printStackTrace();
 		}
     }
+	
+	public boolean isListening() {
+		return this.listening;
+	}
 	
 	public void interrupt() {
 		//On stop l'écoute du clavier
