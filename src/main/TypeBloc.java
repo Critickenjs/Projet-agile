@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
+=======
+package main;
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> cb3f1f0d812d4e8c52cfb213c658df8ed94ee338
 
 public enum TypeBloc {
 	
 	Carre(new int[][]{{3,0},{3,1},{2,0},{2,1}},Couleur.BLUE),Ligne(new int[][]{{3,0},{3,1},{3,2},{2,3}},Couleur.GREEN),
 	Zig(new int[][]{{3,0},{3,1},{2,1},{2,2}},Couleur.RED),Zag(new int[][]{{3,0},{2,0},{2,1},{1,1}},Couleur.YELLOW),
 	T(new int[][]{{3,0},{3,1},{3,2},{2,1}},Couleur.PURPLE),Coin1(new int[][]{{3,0},{3,1},{2,1},{1,1}},Couleur.ORANGE),
+<<<<<<< HEAD
 	Coin2(new int[][]{{1,0},{2,0},{3,0},{3,1}},Couleur.CYAN),Ligne2(new int[][]{{3,0},{2,0},{1,0},{0,0}},Couleur.GREEN),
 	Zig2(new int[][]{{3,1},{2,1},{2,0},{1,0}},Couleur.RED),Zag2(new int[][]{{3,2},{3,1},{2,1},{2,0}},Couleur.YELLOW),
 	T1(new int[][]{{3,0},{2,0},{1,0},{0,0}},Couleur.PURPLE),T2(new int[][]{{3,1},{2,0},{2,1},{2,2}},Couleur.PURPLE),
@@ -13,6 +20,9 @@ public enum TypeBloc {
 	Coin12(new int[][]{{3,0},{2,0},{1,0},{1,1}},Couleur.ORANGE),Coin13(new int[][]{{3,2},{2,0},{2,1},{2,2}},Couleur.ORANGE),
 	Coin21(new int[][]{{3,0},{2,0},{2,1},{2,2}},Couleur.CYAN),Coin22(new int[][]{{1,0},{1,1},{2,1},{3,1}},Couleur.CYAN),
 	Coin23(new int[][]{{3,0},{3,1},{3,2},{2,2}},Couleur.CYAN);
+=======
+	Coin2(new int[][]{{1,0},{2,0},{3,0},{3,1}},Couleur.CYAN),Ligne2(new int[][]{{3,0},{2,0},{1,0},{0,0}},Couleur.GREEN);
+>>>>>>> cb3f1f0d812d4e8c52cfb213c658df8ed94ee338
 	
 	int[][]coordonnees;
 	Couleur couleur;
@@ -38,6 +48,7 @@ public enum TypeBloc {
 		this.couleur = couleur;
 	}
 	
+<<<<<<< HEAD
 	public static TypeBloc recupererType(int[][] tab) {
 		TypeBloc res = null;
 		Map<TypeBloc ,int[][]> coordonnees = new HashMap<TypeBloc,int[][]>();
@@ -53,6 +64,8 @@ public enum TypeBloc {
 		}
 		return res;
 	}
+=======
+>>>>>>> cb3f1f0d812d4e8c52cfb213c658df8ed94ee338
 	public static String tabToString(int[][] tab) {
 		String res =  "";
 		for(int i=0 ; i<tab.length ; i++) {
@@ -101,6 +114,7 @@ public enum TypeBloc {
 		}
 		return res;
 	}
+<<<<<<< HEAD
 	
 	public static void main(String[] args) {
 		TypeBloc piece = TypeBloc.Ligne;
@@ -108,4 +122,13 @@ public enum TypeBloc {
 		System.out.println(tabToString(Ligne2.getCoordonnees()));
 		System.out.println(tabToString(calculerRotation(Ligne2)));
 	}	
+=======
+	public static int[][] genererPiece(){
+		List<int[][]> pieces = new ArrayList<>();
+		for(TypeBloc i : values()) {
+			pieces.add(i.getCoordonnees());
+		}
+		return pieces.get((int) (Math.random() * (pieces.size()-0)));
+	}
+>>>>>>> cb3f1f0d812d4e8c52cfb213c658df8ed94ee338
 }

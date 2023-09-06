@@ -1,7 +1,11 @@
 Baste;1000000000000000000000000000000000000000000000
 titi;13000000000
 toto;21000
+tutu;32590
+tyty;14785
 tata;1001
+xxx;UnNomNul;xxx;1000
 unNomBeaucoupTropLong;100
 EncoreUnNomAleatoire;15
 JeSuisLeMeilleur;0
+HOLA;0

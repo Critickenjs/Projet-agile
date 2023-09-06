@@ -130,12 +130,14 @@ public class Affichage {
 	}
 
 	private static int chercheMaxLongueurNom(String[] listeDesNoms){
+		int longueurNom;
 		int indexSeparateur = listeDesNoms[0].lastIndexOf(";");
 		int max = listeDesNoms[0].substring(0, indexSeparateur).length();
 		for (int i=1; i<listeDesNoms.length; i++){
 			indexSeparateur = listeDesNoms[i].lastIndexOf(";");
-			if (max < listeDesNoms[i].substring(0, indexSeparateur).length()){
-				max = listeDesNoms[i].substring(0, indexSeparateur).length();
+			longueurNom = listeDesNoms[i].substring(0, indexSeparateur).length();
+			if (max < longueurNom){
+				max = longueurNom;
 			}
 		}
 		return max;
@@ -159,6 +161,7 @@ public class Affichage {
 	private static String[] insertEspace(String[] classement){
 		int indexSeparateur;
 		String nom;
+		String nouveauSeparateur = "  |  ";
 		String score;
 		int longueurMaxNom = chercheMaxLongueurNom(recupeNom(classement));
 		int longueurMaxScore = classement[0].substring(classement[0].lastIndexOf(";")+1,classement[0].length()).length();
@@ -166,7 +169,10 @@ public class Affichage {
 			indexSeparateur = classement[i].lastIndexOf(";");
 			nom = classement[i].substring(0,indexSeparateur);
 			score = classement[i].substring(indexSeparateur+1,classement[i].length());
-			classement[i] = nom+repeteCaractere(longueurMaxNom-nom.length(),' ')+" | "+repeteCaractere(longueurMaxScore-score.length(),' ')+score;
+			if (i==9){
+				nouveauSeparateur = " |  ";
+			}
+			classement[i] = nom+repeteCaractere(longueurMaxNom-nom.length(),' ')+nouveauSeparateur+repeteCaractere(longueurMaxScore-score.length(),' ')+score;
 		}
 		return classement;
 	}
