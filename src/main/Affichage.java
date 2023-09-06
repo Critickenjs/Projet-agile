@@ -7,6 +7,7 @@ public class Affichage {
 	private static final String ANSI_RESET = "\u001B[0m";
 	private static final String ANSI_YELLOW = "\u001B[33m";
 	private static final String ANSI_RED = "\u001B[31m";
+	private static final String ANSI_WHITE = "\u001B[37m";
 
 	private static Scanner scanner = new Scanner(System.in);
 
@@ -31,7 +32,7 @@ public class Affichage {
 	}
 
 	private static void changerTailleTerminalMenu() {
-	    System.out.print("\033[18;" + 18 + ";" + 80 + "t");
+	    System.out.print("\033[18;" + 80 + ";" + 24 + "t");
 	}
 	
 	public void init() {
@@ -138,9 +139,11 @@ public class Affichage {
 			nombre = recupererEntrerUtilisateur(1,3);
 			if (nombre == 1){
 				// Mode Simple
+				int score;
 				DebutJeu partie = new DebutJeu(demanderNomJoueur());
-    			partie.jouer(configInitial);
+    			score = partie.jouer(configInitial);
 				changerTailleTerminalMenu();
+				afficherFinPartie(score);
 			} else if (nombre == 2){
 				// Mode Difficile
 			}
@@ -217,6 +220,31 @@ public class Affichage {
 		scanner.nextLine();
 	}
 
+	private static void animationFinPartie(int score){
+		String finPartie = ANSI_RED+"      ___           ___           ___           ___                    ___                        ___           ___     \n" + 
+				"     /  /\\         /  /\\         /__/\\         /  /\\                  /  /\\          ___         /  /\\         /  /\\    \n" + 
+				"    /  /:/_       /  /::\\       |  |::\\       /  /:/_                /  /::\\        /__/\\       /  /:/_       /  /::\\   \n" + 
+				"   /  /:/ /\\     /  /:/\\:\\      |  |:|:\\     /  /:/ /\\              /  /:/\\:\\       \\  \\:\\     /  /:/ /\\     /  /:/\\:\\  \n" +
+				"  /  /:/_/::\\   /  /:/~/::\\   __|__|:|\\:\\   /  /:/ /:/_            /  /:/  \\:\\       \\  \\:\\   /  /:/ /:/_   /  /:/~/:/  \n" +
+				" /__/:/__\\/\\:\\ /__/:/ /:/\\:\\ /__/::::| \\:\\ /__/:/ /:/ /\\          /__/:/ \\__\\:\\  ___  \\__\\:\\ /__/:/ /:/ /\\ /__/:/ /:/___\n" +
+				" \\  \\:\\ /~~/:/ \\  \\:\\/:/__\\/ \\  \\:\\~~\\__\\/ \\  \\:\\/:/ /:/          \\  \\:\\ /  /:/ /__/\\ |  |:| \\  \\:\\/:/ /:/ \\  \\:\\/:::::/\n" +
+				"  \\  \\:\\  /:/   \\  \\::/       \\  \\:\\        \\  \\::/ /:/            \\  \\:\\  /:/  \\  \\:\\|  |:|  \\  \\::/ /:/   \\  \\::/~~~~ \n" +
+				"   \\  \\:\\/:/     \\  \\:\\        \\  \\:\\        \\  \\:\\/:/              \\  \\:\\/:/    \\  \\:\\__|:|   \\  \\:\\/:/     \\  \\:\\     \n" +
+				"    \\  \\::/       \\  \\:\\        \\  \\:\\        \\  \\::/                \\  \\::/      \\__\\::::/     \\  \\::/       \\  \\:\\    \n" +
+				"     \\__\\/         \\__\\/         \\__\\/         \\__\\/                  \\__\\/           ~~~~       \\__\\/         \\__\\/    \n\n\n"+
+				ANSI_WHITE+"      VOTRE SCORE : "+score+"\n\n"+ANSI_YELLOW+"\nAppuyer sur Entrer pour Revenir au Menu Principale "+ANSI_RESET;
+		for (int i=0; i<=finPartie.length(); i++){
+			effacerTerminal();
+			System.out.print(finPartie.substring(0, i));
+			attendre(3000/finPartie.length());
+		}
+	}
+
+	private static void afficherFinPartie(int score){
+		animationFinPartie(score);
+		scanner.nextLine();
+	}
+
 	private static void animationMenu(String diversChoix){
 		for (int i=0; i<=diversChoix.length(); i++){
 			effacerTerminal();
@@ -226,7 +254,10 @@ public class Affichage {
 	}
 
 	public static void Menu(String configInitial) {
+		changerTailleTerminalMenu();
 		animationAllumage();
+		animationMenu(ANSI_YELLOW+"CLIQUER SUR ENTRER "+ANSI_RESET);
+		scanner.nextLine();
 		int nombre = -1;
 		while(nombre != 3){
 			effacerTerminal();
@@ -245,46 +276,5 @@ public class Affichage {
 		}
 		animationExtinction();
 		effacerTerminal();
-	}
-
-	public static void affichePlateau() {
-		System.out.println("Score:\n"
-						 + "__________\n"
-						+ "|          |\n"
-						+ "|          |\n"
-						+ "|__________|\n");
-		System.out.println("____________\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "|            |\n"
-						+ "--------------\n");
 	}
 }
