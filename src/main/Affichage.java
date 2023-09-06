@@ -56,7 +56,7 @@ public class Affichage {
 					+ "   \\  \\:\\/:/      \\  \\::/      \\  \\:\\/:/     \\  \\:\\/:/     \\  \\:\\        \\__\\/ /:/  \n"
 					+ "    \\  \\::/        \\__\\/        \\  \\::/       \\  \\::/       \\  \\:\\         /__/:/   \n"
 					+ "     \\__\\/                       \\__\\/         \\__\\/         \\__\\/         \\__\\/    "
-					+"\n\n\n Bienvenue dans blocks un jeu cool.\n\n";
+					+"\n\n\n T BLOKE T TRIST.\n\n";
 	}
 
 	private static void attendre(int miliseconde){

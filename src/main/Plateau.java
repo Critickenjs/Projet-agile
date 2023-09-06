@@ -4,7 +4,7 @@ import deplacement.DeplacementBas;
 import deplacement.DeplacementDroite;
 
 public class Plateau {
-    public static final int LARGEUR = 8;
+    public static final int LARGEUR = 12;
     public static final int HAUTEUR = 20;
     //This will be a matrix of colours (enum for each block)
     private Couleur plateauActuel[][];
@@ -57,13 +57,14 @@ public class Plateau {
 			}
 
             res += "| ";
-            if(i == 2 || i == 4){
-                res += "\t ------------";
-            }else if(i==3){
-                res += "\t | " + joueur.getScore() + " |";
-            }
+            // if(i == 2 || i == 4){
+            //     res += "\t --------";
+            // }else if(i==3){
+            //     res += "\t | " + joueur.getScore() + " ";
+            // }
 			res += "\r\n";
 		}
+        res += " ------- \r\n " + joueur.getScore() + "\r\n -------";
          return res;
      }
 
@@ -114,51 +115,71 @@ public class Plateau {
 			}
 		}
     }
+
+    public void rotation(int ligne, int colonne){
+        Deplacement d1 = new DeplacementBas();
+        Deplacement d2 = new DeplacementDroite();
+        // int[][] temp = this.next_pos;
+        for(int l = 0;l<colonne;l++){
+            this.next_pos = d2.deplacement(this.next_pos, blocCourant);
+        }
+        for(int k = 0;k<ligne;k++){
+            this.next_pos = d1.deplacement(this.next_pos, blocCourant);
+        }
+    }
     
     public boolean deplacement(Deplacement d){
         //Calcul des positions suivantes
-        if(d.estRotation()){
-            int ligne = 0;
-            int colonne = 0;
-            boolean found = false;
-            int i = 0;
-            while(!found && i<HAUTEUR){
-                int j = 0;
-                while(!found && j<LARGEUR){
-                    if(plateauActuel[i][j]!=Couleur.EMPTY){
-                        ligne = i;
-                        colonne = j;
-                    }
-                    j++;
+       if(d.estRotation()){
+            int ligne = HAUTEUR;
+            int colonne = LARGEUR;
+            // boolean found = false;
+            // int i = 0;
+            // while(!found && i<HAUTEUR){
+            //     int j = 0;
+            //     while(!found && j<LARGEUR){
+            //         if(plateauActuel[i][j]!=Couleur.EMPTY){
+            //             ligne = i;
+            //             colonne = j;
+            //         }
+            //         j++;
+            //     }
+            //     i++;
+            // }
+            for(int i=0;i<current_pos.length;i++){
+                int numLigne = this.current_pos[i][0];
+                int numColonne = this.current_pos[i][1];
+                if(numLigne<ligne){
+                    ligne = numLigne;
                 }
-                i++;
+                if(numColonne<colonne){
+                    colonne = numColonne;
+                }
             }
-            int[][] nouveauCoord = d.deplacement(current_pos, blocCourant);
-            this.blocCourant = this.blocCourant.getPieceSuivante();
 
-            // GET NEW SHAPE AT THE TOP OF THE PLATEAU
-            Deplacement d1 = new DeplacementBas();
-            Deplacement d2 = new DeplacementDroite();
-            for(int l = 0;l<colonne;l++){
-                d2.deplacement(nouveauCoord, blocCourant);
+
+            this.next_pos = d.deplacement(current_pos, blocCourant);
+            rotation(ligne, colonne);
+            if (this.positionsSuivantesLibres() == true) {
+                this.blocCourant = this.blocCourant.getPieceSuivante();
             }
-            for(int k = 0;k<ligne-1;k++){
-                d1.deplacement(nouveauCoord, blocCourant);
-            }
-            goDown();
             
-            return true;
+
+            // // GET NEW SHAPE AT THE TOP OF THE PLATEAU
+
+            // return this.deplacement(d1);
         }else{
             this.next_pos = d.deplacement(current_pos, this.blocCourant);
             //  this.next_pos = this.calculerPositionsSuivante(current_pos); 
-            if (this.positionsSuivantesLibres() == false) {
-                return false;
-            }
-            emptyCases();
-            colourCases();
-            this.current_pos = this.next_pos;
-            return true;
         }
+        if (this.positionsSuivantesLibres() == false) {
+            return false;
+        }
+        emptyCases();
+        colourCases();
+        this.current_pos = this.next_pos;
+        return true;
+        
     }
     
     public boolean goDown() {

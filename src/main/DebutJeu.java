@@ -41,7 +41,7 @@ public class DebutJeu{
     
     public void jouer(String configInitial) {
     	//Initialisation du jeu		
-    	Affichage affichageCourant = new Affichage(Plateau.HAUTEUR+2, Plateau.LARGEUR+2);
+    	Affichage affichageCourant = new Affichage(Plateau.HAUTEUR+6, Plateau.LARGEUR+20);
     	affichageCourant.init();
         
         
