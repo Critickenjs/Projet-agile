@@ -49,7 +49,7 @@ public class Plateau {
 				if (this.plateauSuivant[i][j] == Couleur.EMPTY) {
 					res += " ";
 				} else {
-					res += "O";
+					res += this.blocCourant.getCouleur().toString();
 				}
 			}
 			res += "\r\n";
@@ -107,7 +107,7 @@ public class Plateau {
     
     public boolean deplacement(Deplacement d){
         //Calcul des positions suivantes
-         this.next_pos = d.deplacement(current_pos);
+         this.next_pos = d.deplacement(current_pos, this.blocCourant);
     	//  this.next_pos = this.calculerPositionsSuivante(current_pos); 
     	 if (this.positionsSuivantesLibres() == false) {
 			return false;

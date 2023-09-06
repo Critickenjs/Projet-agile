@@ -50,7 +50,7 @@ public class DebutJeu{
 		kl.start();
         
         int score = 0;
-        boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
+        boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.genererPiece());
         affichageCourant.rafraichir(plateauActuel.toString());
       //Tant que l'on peut ajouter une pièce
         while (ajoutBlocOk) {
@@ -63,7 +63,7 @@ public class DebutJeu{
 			//Efface ligne + calcule du score
 			score += plateauActuel.calculateScore();
         	//Ajout d'une pièce
-        	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
+        	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.genererPiece());
         	if (ajoutBlocOk) {
         		affichageCourant.rafraichir(plateauActuel.toString());
 			}

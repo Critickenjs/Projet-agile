@@ -1,6 +1,9 @@
 package deplacement;
+
+import main.TypeBloc;
+
 public class DeplacementDroite implements Deplacement{
-    public int[][] deplacement(int[][] positionsPrecedentes){
+    public int[][] deplacement(int[][] positionsPrecedentes, TypeBloc piece){
         int[][] result = new int[4][2];
         for (int i = 0; i < result.length; i++) {
             result[i][0] = positionsPrecedentes[i][0];

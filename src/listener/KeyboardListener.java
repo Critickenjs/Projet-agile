@@ -8,6 +8,7 @@ import deplacement.Deplacement;
 import deplacement.DeplacementBas;
 import deplacement.DeplacementDroite;
 import deplacement.DeplacementGauche;
+import deplacement.DeplacementRotation;
 
 public class KeyboardListener extends Thread {
 	
@@ -60,7 +61,7 @@ public class KeyboardListener extends Thread {
 					}
 				} else if (toucheCourante == 32) {
 					//ESPACE
-					//Rotation à faire
+					deplacement = new DeplacementRotation();
 				}
 				//On peut ajouter l'action à la queue
 				if (deplacement!= null) {
