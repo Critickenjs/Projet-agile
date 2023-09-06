@@ -49,10 +49,10 @@ public class Plateau {
 				if (this.plateauSuivant[i][j] == Couleur.EMPTY) {
 					res += " ";
 				} else {
-					res += this.blocCourant.getCouleur().toString();
+					res += this.plateauSuivant[i][j].toString();
 				}
 			}
-			res += "\r\n";
+			res += "\r\n" + "\033[0;34m";
 		}
          return res;
      }
