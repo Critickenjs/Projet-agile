@@ -9,9 +9,8 @@ public class Plateau {
     private Affichage affi;
     private TypeBloc blocCourant;
     private Joueur joueur;
-    private Deplacement deplacementBas = new DeplacementBas();
-    private Deplacement deplacementDroite = new DeplacementDroite();
-    private Deplacement deplacementGauche = new DeplacementGauche();
+    private int speed;
+
     
     public Plateau(String joueur_nom){
         plateauActuel = new Couleur[HAUTEUR][LARGEUR];
@@ -24,6 +23,15 @@ public class Plateau {
             }
         }
         joueur = new Joueur(joueur_nom);
+        speed = 300;
+    }
+
+    public int getSpeed(){
+        return speed;
+    }
+
+    public void setSpeed(int speed){
+        this.speed = speed;
     }
     
     public boolean ajouterBloc(TypeBloc bloc) {
@@ -108,84 +116,41 @@ public class Plateau {
     
     public boolean deplacement(Deplacement d){
         //Calcul des positions suivantes
-         this.next_pos = d.deplacement(current_pos);
+        this.next_pos = d.deplacement(current_pos);
     	//  this.next_pos = this.calculerPositionsSuivante(current_pos); 
-    	 if (this.positionsSuivantesLibres() == false) {
-    		 //Fin de la chute, on copie le plateau suivant
-    		 this.copiePlateau();
+    	if (this.positionsSuivantesLibres() == false) {
+    		//Fin de la chute, on copie le plateau suivant
+    		this.copiePlateau();
 			return false;
          }
-         emptyCases();
+        emptyCases();
         colourCases();
         this.current_pos = this.next_pos;
         return true;
     }
-
-    //  public boolean goDown(){
-    // 	 //Calcul des positions suivantes
-    //      this.next_pos = deplacementBas.deplacement(current_pos);
-    // 	//  this.next_pos = this.calculerPositionsSuivante(current_pos); 
-    // 	 if (this.positionsSuivantesLibres() == false) {
-    // 		 //Fin de la chute, on copie le plateau suivant
-    // 		 this.copiePlateau();
-	// 		return false;
-	// 	}
-
-    //     emptyCases();
-    //     colourCases();
-    //     this.current_pos = this.next_pos;
-    //     return true;
-    // }
-
-    // public boolean goRight(){
-    //     this.next_pos = deplacementDroite.deplacement(current_pos);
-    //     if (this.positionsSuivantesLibres() == false) {
-    // 		 //Fin de la chute, on copie le plateau suivant
-    // 		 this.copiePlateau();
-	// 		return false;
-	// 	}
-
-    //     emptyCases();
-    //     colourCases();
-    //     this.current_pos = this.next_pos;
-    //     return true;
-    // }
-
-    // public boolean goLeft(){
-    //     this.next_pos = deplacementGauche.deplacement(current_pos);
-    //     if (this.positionsSuivantesLibres() == false) {
-    // 		 //Fin de la chute, on copie le plateau suivant
-    // 		 this.copiePlateau();
-	// 		return false;
-	// 	}
-
-    //     emptyCases();
-    //     colourCases();
-    //     this.current_pos = this.next_pos;
-    //     return true;
-    // }
      
  	///////////////////////// Lignes Pleines ////////////////////////////
      /// Pour commencer la verification des lignes, appel Calculat
 
- 	public boolean lignePleine(int numLigne){
-         boolean pleine = true;
-         int i = 0;
-         while(pleine && i < LARGEUR){
-             if(plateauActuel[numLigne][i] == Couleur.EMPTY){
-                 pleine = false;
-             }else{
-                 i++;
-             }
-         }
+	public boolean lignePleine(int numLigne){
+        boolean pleine = true;
+        int i = 0;
+        while(pleine && i < LARGEUR){
+            if(plateauActuel[numLigne][i] == Couleur.EMPTY){
+                pleine = false;
+            }else{
+                i++;
+            }
+        }
 
          return pleine;
+        
      }
 
      //Vide ligne
      public void videLigne(int numLigne){
          for(int i = 0; i< LARGEUR;i++){
-             plateauActuel[numLigne][i] = Couleur.EMPTY;
+             plateauSuivant[numLigne][i] = Couleur.EMPTY;
          }
      }
 
@@ -193,23 +158,24 @@ public class Plateau {
      public void descenteLignes(int numLigne){
          for(int i = numLigne;i>0;i--){
              for(int j = 0 ; j<LARGEUR;j++){
-                 plateauActuel[i][j] = plateauActuel[i-1][j];
+                 plateauSuivant[i][j] = plateauSuivant[i-1][j];
              }
          }
      }
 
      //Loop through all the lines - count number of full lines for points later
-     public int verifiePlateau(){
-         int nbLignes = 0;
-         for(int i=0;i<HAUTEUR;i++){
-             if(lignePleine(i)){
-                 videLigne(i);
-                 descenteLignes(i);
-                 nbLignes++; 
-             }
-         }
-         return nbLignes;
-     }
+    public int verifiePlateau(){
+        int nbLignes = 0;
+        for(int i=0;i<HAUTEUR;i++){
+            if(lignePleine(i)){
+                videLigne(i);
+                descenteLignes(i);
+                nbLignes++; 
+            }
+        }
+        this.copiePlateau();
+        return nbLignes;
+    }
 
      // public void displayPlateau(){
      //     for(int i=0;i<HAUTEUR;i++){
@@ -223,20 +189,21 @@ public class Plateau {
 
  	//Pour faire la partie score, on a besoin d'un joueur
 
- 	public int calculateScore(int oldScore){
-         int toAdd = verifiePlateau();
-         switch(toAdd){
-             case 1:
-                 toAdd = 100;
-             case 2:
-                 toAdd = 300;
-             case 3:
-                 toAdd = 500;
-             case 4:
-                 toAdd = 800;
-         }
+ 	public int calculateScore(){
+        int oldScore = joueur.getScore();
+        int toAdd = verifiePlateau();
+        switch(toAdd){
+            case 1:
+                toAdd = 100;
+            case 2:
+                toAdd = 300;
+            case 3:
+                toAdd = 500;
+            case 4:
+                toAdd = 800;
+        }
 
-         joueur.setScore(oldScore + toAdd);
-         return oldScore + toAdd;
+        joueur.setScore(oldScore + toAdd);
+        return oldScore + toAdd;
      }
 }

@@ -7,6 +7,8 @@ public class DebutJeu{
     }
 
     public static void main(String[] args) {
+		int i = 0;
+		int speedUp = 1500;
     	//Initialisation du jeu
 
 		//Il faut demander a l'utilisateur son nom, mettre dans 
@@ -20,29 +22,43 @@ public class DebutJeu{
         Plateau plateauActuel = new Plateau(joueur_nom);
         
         int score = 0;
+		Deplacement deplacementBas = new DeplacementBas();
+		Deplacement deplacementDroite = new DeplacementDroite();
+		Deplacement deplacementGauche = new DeplacementGauche();
         boolean ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
         affichageCourant.rafraichir(plateauActuel.toString());
       //Tant que l'on peut ajouter une pièce
         while (ajoutBlocOk) {
         	//On avance la pièce tant que l'on peut
-        	boolean piecePeutAvancer = plateauActuel.goDown();
+        	boolean piecePeutAvancer = plateauActuel.deplacement(deplacementBas);
         	while (piecePeutAvancer) {
         		affichageCourant.rafraichir(plateauActuel.toString());
         		try {
-					Thread.sleep(200);
+					Thread.sleep(plateauActuel.getSpeed());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-        		piecePeutAvancer = plateauActuel.goDown();
+        		piecePeutAvancer = plateauActuel.deplacement(deplacementBas);
     		}
 			//Efface ligne + calcule du score
-			score += plateauActuel.calculateScore(score);
+			// int nbLignes = plateauActuel.verifiePlateau();
+			// affichageCourant.rafraichir(plateauActuel.toString());
+			score = plateauActuel.calculateScore();
+			affichageCourant.rafraichir(plateauActuel.toString());
 			System.out.println(joueur_nom + " : " + score);
+			//Test for speed up - every 1500 points, it speeds up by 10
+			if(score>speedUp){
+				if(plateauActuel.getSpeed() > 50){
+					plateauActuel.setSpeed(plateauActuel.getSpeed()-10);
+				}
+				speedUp+=1500;
+			}
         	//Ajout d'une pièce
         	ajoutBlocOk = plateauActuel.ajouterBloc(TypeBloc.Carre);
         	if (ajoutBlocOk) {
         		affichageCourant.rafraichir(plateauActuel.toString());
 			}
+			i++;
 		}
     }
 }
