@@ -15,7 +15,7 @@ public class Affichage {
 
 	private static boolean problemeDeSaisie = false;
 	
-	public static final int HAUTEUR_JEU = Plateau.HAUTEUR+6;
+	public static final int HAUTEUR_JEU = Plateau.HAUTEUR+8;
 	public static final int LARGEUR_JEU = Plateau.LARGEUR+20;
 	
 	public static final int HAUTEUR_MENU = 25;
