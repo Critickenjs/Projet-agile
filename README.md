@@ -26,7 +26,7 @@ Durant ce sprint, on a pu aborder les fonctionnalités de base du jeu, c'est-à-
 De tous les éléments, celui qu'on veut améliorer est le Plan, on peut mésuser s'il s'améliore en vérifiant les résultats dans le check. On peut l'améliorer en surestimant le temps qu'une tache pourrait nous prendre afin d'être sur d'avoir bien le temps.
 
 # Mémo
-![radiateur](image/image.png)
+![radiateur](images/image.png)
 
 # Sprint 2
 
@@ -55,7 +55,7 @@ Il y a eu un problème d'estimation de temps. De ce fait, nous avons compléteme
 
 
 # Mémo
-![mémo2](image/image-1.png)
+![mémo2](images/image-1.png)
 # Sprint 3
 
 ## Démo + Planification du sprint suivant
@@ -91,7 +91,7 @@ Il y a eu un problème de check durant les derniers sprints, nous n'avons pas pr
 
 
 # Mémo
-![mémo 3](image/image-2.png)
+![mémo 3](images/image-2.png)
 
 # Sprint 4
 
@@ -174,5 +174,142 @@ ob doit améliorer notre gestion du temps afin d'etre le plus efficace possible,
 
 # Mémo
 ![mémo 5](image/image4.png)
+# Sprint 6
+
+## Démo + Planification du sprint suivant
+
+
+### Ce que nous avons fait durant ce sprint
+
+- Saisie utilisateur (Décrire ce que cela implique en termes de fonctionnalités ou d'interaction utilisateur.)
+
+### Ce que nous allons faire durant le prochain sprint
+
+- Gérer la rotation des blocs (Décrivez les détails de cette fonctionnalité.)
+- Mode de jeu infini (Expliquez ce que signifie "infini" dans le contexte de votre jeu.)
+
+## Rétrospective
+
+### Sur quoi avons-nous buté ?
+
+- Problèmes techniques (Identifiez spécifiquement les problèmes techniques que vous avez rencontrés.)
+- Gestion du temps (Expliquez en quoi la gestion du temps a posé problème.)
+- Gestion de Git (Détaillez les difficultés rencontrées avec Git.)
+
+### PDCA
+
+- Améliorer la gestion du temps en :
+  - Estimant plus précisément la durée des tâches.
+  - Planifiant suffisamment de temps pour les problèmes techniques imprévus.
+
+- Améliorer la gestion de Git en :
+  - Organisant des sessions de formation ou en recherchant des ressources pour l'équipe.
+  - Mettant en place des pratiques de gestion de code plus structurées.
+
+# Mémo
+![mémo 6](images/sprint6.jpg)
+
+# Sprint 7
+
+## Démo + Planification du sprint suivant
+
+
+### Ce que nous avons fait durant ce sprint
+
+- Gestion de la vitesse (Décrivez les fonctionnalités liées à la gestion de la vitesse.)
+- Réglage de l'effacement des lignes (Expliquez les détails de cette fonctionnalité.)
+
+### Ce que nous allons faire durant le prochain sprint
+
+- Terminer la gestion de la rotation des blocs (Décrivez les détails de cette fonctionnalité.)
+- Implémenter le mode de jeu infini (Expliquez ce que signifie "infini" dans le contexte de votre jeu.)
+
+## Rétrospective
+
+### Sur quoi avons-nous buté ?
+
+- Gérer la rotation des blocs (Identifiez les problèmes spécifiques rencontrés lors de la gestion de la rotation.)
+- Gestion du temps (Expliquez en quoi la gestion du temps a encore posé problème malgré les actions d'amélioration précédentes.)
+
+### PDCA
+
+- Améliorer la gestion du temps en :
+  - Mieux décomposer les tâches liées à la gestion de la rotation des blocs.
+  - Allouant suffisamment de temps pour les tests et la résolution de problèmes imprévus.
+
+- Trouver des solutions pour la gestion de la rotation des blocs en :
+  - Consacrant du temps à la recherche de solutions techniques spécifiques.
+  - Envisageant de solliciter l'aide d'experts ou de pairs en cas de difficultés persistantes.
+
+# Mémo
+![mémo 6](images/sprint7.jpg)
+
+# Sprint 8
+
+## Démo + Planification du sprint suivant
+
+
+### Ce que nous avons fait durant ce sprint
+
+- Implémentation du menu (Détaillez les fonctionnalités du menu.)
+- Debug des couleurs (Expliquez les problèmes de couleurs que vous avez résolus.)
+- Perfectionnement du menu (Décrivez les améliorations apportées au menu.)
+
+### Ce que nous allons faire durant le prochain sprint
+
+- Terminer la gestion de la rotation des blocs (Précisez les étapes restantes pour cette fonctionnalité.)
+- Finaliser le mode de jeu infini (Expliquez les éléments à achever pour le mode infini.)
+
+## Rétrospective
+
+### Sur quoi avons-nous buté ?
+
+- Rotation des blocs (Identifiez les problèmes spécifiques rencontrés lors de la gestion de la rotation malgré les tentatives précédentes.)
+- Mode infini (Expliquez les défis qui persistent dans la mise en œuvre du mode infini.)
+
+### PDCA
+
+- Continuer à travailler sur la gestion de la rotation des blocs en :
+  - Consacrant du temps à la résolution des problèmes techniques restants.
+  - Recherchant des ressources ou une expertise externe si nécessaire.
+
+- S'attaquer aux défis du mode infini en :
+  - Analyser les problèmes existants de manière approfondie.
+  - Consulter des références ou des exemples de code pour obtenir des idées sur la façon de résoudre ces problèmes.
+
+# Mémo
+![mémo 6](images/sprint8.jpg)
+
+# Sprint 9
+
+## Démo + Planification du sprint suivant
+
+
+### Ce que nous avons fait durant ce sprint
+
+- Finalisation de la gestion de la rotation des blocs (Décrivez les fonctionnalités ou les corrections apportées.)
+- Finalisation du mode infini (Expliquez les fonctionnalités du mode infini.)
+
+
+
+## Rétrospective
+
+### Sur quoi avons-nous buté ?
+
+- (Dans ce sprint, nous n'avons pas rencontré de problèmes spécifiques.)
+
+### PDCA
+
+- Mieux prendre en compte les saisies utilisateur en :
+  - Effectuant un examen approfondi des besoins des utilisateurs pour vous assurer de ne rien négliger.
+  - Sollicitant des retours d'utilisateurs pour améliorer davantage les fonctionnalités basées sur les saisies utilisateur.
+  - Et de mieux les prioriser afin de les finir en premier lieu
+
+# Mémo
+![mémo 6](images/sprint9.jpg)
+
+# groupe 2
+
+
 
 
