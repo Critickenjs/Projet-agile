@@ -83,6 +83,8 @@ public class Plateau {
 		}
     	res += "  [←]\t      [␣]\t [→]";
     	res += "\r\n\r\n";
+    	res += "     \t      [↓]";
+    	res += "\r\n\r\n";
     	res += joueur.getScore() + " pts";
     	return res;
     }

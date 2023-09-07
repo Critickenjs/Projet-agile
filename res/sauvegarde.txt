@@ -1,5 +1,6 @@
 Baste;10000000
 titi;1300000
+arthur;125600
 toto;21000
 tutu;32590
 tyty;14785
@@ -24,3 +25,5 @@ j[3~;0
 h;0
 test;0
 hhh;0
+hh;0
+enya;0
